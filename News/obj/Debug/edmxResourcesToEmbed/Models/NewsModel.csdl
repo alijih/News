@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NewsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Categoria">
+    <Key>
+      <PropertyRef Name="id_categoria" />
+    </Key>
+    <Property Name="id_categoria" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="portada" Type="Byte" />
+    <Property Name="hide" Type="Byte" />
+    <NavigationProperty Name="Categoria1" Relationship="Self.FK_Categoria_Categoria" FromRole="Categoria" ToRole="Categoria1" />
+    <NavigationProperty Name="Categoria2" Relationship="Self.FK_Categoria_Categoria" FromRole="Categoria1" ToRole="Categoria" />
+    <NavigationProperty Name="Noticia" Relationship="Self.FK_Noticia_Categoria" FromRole="Categoria" ToRole="Noticia" />
+  </EntityType>
+  <EntityType Name="Noticia">
+    <Key>
+      <PropertyRef Name="id_noticia" />
+    </Key>
+    <Property Name="id_noticia" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_categoria" Type="Int64" Nullable="false" />
+    <Property Name="titulo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="subtitulo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="foto_portada" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="foto_noticia" Type="String" MaxLength="250" FixedLength="true" Unicode="true" />
+    <Property Name="portada" Type="Byte" Nullable="false" />
+    <Property Name="hide" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="Categoria" Relationship="Self.FK_Noticia_Categoria" FromRole="Noticia" ToRole="Categoria" />
+  </EntityType>
+  <EntityType Name="Portada">
+    <Key>
+      <PropertyRef Name="id_portada" />
+    </Key>
+    <Property Name="id_portada" Type="Int32" Nullable="false" />
+    <Property Name="cantidad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="id_usuario" />
+    </Key>
+    <Property Name="id_usuario" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nickname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="rol" Type="Byte" Nullable="false" />
+    <Property Name="user_foto" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="user_descripcion" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="active" Type="Boolean" />
+    <Property Name="token" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_Categoria_Categoria">
+    <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
+    <End Role="Categoria1" Type="Self.Categoria" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Categoria">
+        <PropertyRef Name="id_categoria" />
+      </Principal>
+      <Dependent Role="Categoria1">
+        <PropertyRef Name="id_categoria" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Noticia_Categoria">
+    <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
+    <End Role="Noticia" Type="Self.Noticia" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Categoria">
+        <PropertyRef Name="id_categoria" />
+      </Principal>
+      <Dependent Role="Noticia">
+        <PropertyRef Name="id_noticia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="NewsEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Categoria" EntityType="Self.Categoria" />
+    <EntitySet Name="Noticia" EntityType="Self.Noticia" />
+    <EntitySet Name="Portada" EntityType="Self.Portada" />
+    <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+    <AssociationSet Name="FK_Categoria_Categoria" Association="Self.FK_Categoria_Categoria">
+      <End Role="Categoria" EntitySet="Categoria" />
+      <End Role="Categoria1" EntitySet="Categoria" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Noticia_Categoria" Association="Self.FK_Noticia_Categoria">
+      <End Role="Categoria" EntitySet="Categoria" />
+      <End Role="Noticia" EntitySet="Noticia" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

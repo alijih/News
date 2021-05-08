@@ -1,0 +1,264 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="NewsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="id_categoria" />
+          </Key>
+          <Property Name="id_categoria" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="portada" Type="tinyint" />
+          <Property Name="hide" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="Noticia">
+          <Key>
+            <PropertyRef Name="id_noticia" />
+          </Key>
+          <Property Name="id_noticia" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_categoria" Type="bigint" Nullable="false" />
+          <Property Name="titulo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="subtitulo" Type="varchar" MaxLength="50" />
+          <Property Name="descripcion" Type="text" Nullable="false" />
+          <Property Name="foto_portada" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="foto_noticia" Type="nchar" MaxLength="250" />
+          <Property Name="portada" Type="tinyint" Nullable="false" />
+          <Property Name="hide" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Portada">
+          <Key>
+            <PropertyRef Name="id_portada" />
+          </Key>
+          <Property Name="id_portada" Type="int" Nullable="false" />
+          <Property Name="cantidad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nickname" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="rol" Type="tinyint" Nullable="false" />
+          <Property Name="user_foto" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="user_descripcion" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="100" />
+          <Property Name="apellido" Type="varchar" MaxLength="100" />
+          <Property Name="active" Type="bit" />
+          <Property Name="token" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK_Categoria_Categoria">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
+          <End Role="Categoria1" Type="Self.Categoria" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="id_categoria" />
+            </Principal>
+            <Dependent Role="Categoria1">
+              <PropertyRef Name="id_categoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Noticia_Categoria">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
+          <End Role="Noticia" Type="Self.Noticia" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="id_categoria" />
+            </Principal>
+            <Dependent Role="Noticia">
+              <PropertyRef Name="id_noticia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NewsModelStoreContainer">
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Noticia" EntityType="Self.Noticia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Portada" EntityType="Self.Portada" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Categoria_Categoria" Association="Self.FK_Categoria_Categoria">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Categoria1" EntitySet="Categoria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Noticia_Categoria" Association="Self.FK_Noticia_Categoria">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Noticia" EntitySet="Noticia" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="NewsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="id_categoria" />
+          </Key>
+          <Property Name="id_categoria" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="portada" Type="Byte" />
+          <Property Name="hide" Type="Byte" />
+          <NavigationProperty Name="Categoria1" Relationship="Self.FK_Categoria_Categoria" FromRole="Categoria" ToRole="Categoria1" />
+          <NavigationProperty Name="Categoria2" Relationship="Self.FK_Categoria_Categoria" FromRole="Categoria1" ToRole="Categoria" />
+          <NavigationProperty Name="Noticia" Relationship="Self.FK_Noticia_Categoria" FromRole="Categoria" ToRole="Noticia" />
+        </EntityType>
+        <EntityType Name="Noticia">
+          <Key>
+            <PropertyRef Name="id_noticia" />
+          </Key>
+          <Property Name="id_noticia" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_categoria" Type="Int64" Nullable="false" />
+          <Property Name="titulo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="subtitulo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="foto_portada" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="foto_noticia" Type="String" MaxLength="250" FixedLength="true" Unicode="true" />
+          <Property Name="portada" Type="Byte" Nullable="false" />
+          <Property Name="hide" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Categoria" Relationship="Self.FK_Noticia_Categoria" FromRole="Noticia" ToRole="Categoria" />
+        </EntityType>
+        <EntityType Name="Portada">
+          <Key>
+            <PropertyRef Name="id_portada" />
+          </Key>
+          <Property Name="id_portada" Type="Int32" Nullable="false" />
+          <Property Name="cantidad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nickname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rol" Type="Byte" Nullable="false" />
+          <Property Name="user_foto" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="user_descripcion" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="active" Type="Boolean" />
+          <Property Name="token" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_Categoria_Categoria">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
+          <End Role="Categoria1" Type="Self.Categoria" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="id_categoria" />
+            </Principal>
+            <Dependent Role="Categoria1">
+              <PropertyRef Name="id_categoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Noticia_Categoria">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
+          <End Role="Noticia" Type="Self.Noticia" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="id_categoria" />
+            </Principal>
+            <Dependent Role="Noticia">
+              <PropertyRef Name="id_noticia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NewsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" />
+          <EntitySet Name="Noticia" EntityType="Self.Noticia" />
+          <EntitySet Name="Portada" EntityType="Self.Portada" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <AssociationSet Name="FK_Categoria_Categoria" Association="Self.FK_Categoria_Categoria">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Categoria1" EntitySet="Categoria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Noticia_Categoria" Association="Self.FK_Noticia_Categoria">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Noticia" EntitySet="Noticia" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="NewsModelStoreContainer" CdmEntityContainer="NewsEntities">
+          <EntitySetMapping Name="Categoria">
+            <EntityTypeMapping TypeName="NewsModel.Categoria">
+              <MappingFragment StoreEntitySet="Categoria">
+                <ScalarProperty Name="id_categoria" ColumnName="id_categoria" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="portada" ColumnName="portada" />
+                <ScalarProperty Name="hide" ColumnName="hide" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Noticia">
+            <EntityTypeMapping TypeName="NewsModel.Noticia">
+              <MappingFragment StoreEntitySet="Noticia">
+                <ScalarProperty Name="id_noticia" ColumnName="id_noticia" />
+                <ScalarProperty Name="id_categoria" ColumnName="id_categoria" />
+                <ScalarProperty Name="titulo" ColumnName="titulo" />
+                <ScalarProperty Name="subtitulo" ColumnName="subtitulo" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="foto_portada" ColumnName="foto_portada" />
+                <ScalarProperty Name="foto_noticia" ColumnName="foto_noticia" />
+                <ScalarProperty Name="portada" ColumnName="portada" />
+                <ScalarProperty Name="hide" ColumnName="hide" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Portada">
+            <EntityTypeMapping TypeName="NewsModel.Portada">
+              <MappingFragment StoreEntitySet="Portada">
+                <ScalarProperty Name="id_portada" ColumnName="id_portada" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="NewsModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="nickname" ColumnName="nickname" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="rol" ColumnName="rol" />
+                <ScalarProperty Name="user_foto" ColumnName="user_foto" />
+                <ScalarProperty Name="user_descripcion" ColumnName="user_descripcion" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellido" ColumnName="apellido" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="token" ColumnName="token" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

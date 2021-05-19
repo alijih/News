@@ -7,6 +7,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using News.Models;
 using News.Models.WS;
+using System.Web.Http.Cors;
 
 namespace News.Controllers
 {

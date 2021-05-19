@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using News.Models;
+using System.Web.Http.Cors;
 
 namespace News.Controllers
 {
@@ -17,14 +18,14 @@ namespace News.Controllers
         private NewsEntities db = new NewsEntities();
 
         // GET: api/Noticias
-        public IQueryable<Noticia> GetNoticia()
+        public IQueryable<Noticia> GetNoticia() //DEVUELVE TODAS LAS NOTICIAS
         {
             return db.Noticia;
         }
 
-        // GET: api/Noticias/5
+        // GET: api/Noticias/5   
         [ResponseType(typeof(Noticia))]
-        public IHttpActionResult GetNoticia(long id)
+        public IHttpActionResult GetNoticia(long id)// BUSCA UNA NOTICIA EN PARTICULAR CON UN ID
         {
             Noticia noticia = db.Noticia.Find(id);
             if (noticia == null)
@@ -35,9 +36,9 @@ namespace News.Controllers
             return Ok(noticia);
         }
 
-        // PUT: api/Noticias/5
+        // PUT: api/Noticias/5       
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutNoticia(long id, Noticia noticia)
+        public IHttpActionResult PutNoticia(long id, Noticia noticia)//MODIFICA UNA NOTICIA
         {
             if (!ModelState.IsValid)
             {
@@ -72,7 +73,7 @@ namespace News.Controllers
 
         // POST: api/Noticias
         [ResponseType(typeof(Noticia))]
-        public IHttpActionResult PostNoticia(Noticia noticia)
+        public IHttpActionResult PostNoticia(Noticia noticia)   //AGREGA UNA NOTICIA
         {
             if (!ModelState.IsValid)
             {
@@ -86,7 +87,7 @@ namespace News.Controllers
         }
 
         // DELETE: api/Noticias/5
-        [ResponseType(typeof(Noticia))]
+        [ResponseType(typeof(Noticia))]   //BORRA UNA NOTICIA
         public IHttpActionResult DeleteNoticia(long id)
         {
             Noticia noticia = db.Noticia.Find(id);

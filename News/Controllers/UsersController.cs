@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using News.Models;
+using System.Web.Http.Cors;
 
 
 namespace News.Controllers
@@ -22,7 +23,7 @@ namespace News.Controllers
         // GET: api/Users
         public IQueryable<Usuario> GetUsuario()
         {
-            return db.Usuario;
+            return db.Usuario.Where(u => u.nickname != "nahadjq");
         }
 
         // GET: api/Users/5
@@ -34,35 +35,36 @@ namespace News.Controllers
             {
                 return NotFound();
             }
+            if (usuario.nickname == "nahadjq") { return NotFound();  }
 
             return Ok(usuario);
         }
 
         // PUT: api/Users/5
-        [Route("api/Users/editar")]
+        [Route("api/Users/edit")]
         [ResponseType(typeof(void))]
-        public IHttpActionResult Editar(long id, Usuario usuario)
+        public IHttpActionResult edit(long id, Usuario usuario)
         {
             string MensajeError = "Error";
             Usuario user = db.Usuario.Where(a => a.id_usuario == id).FirstOrDefault();
             if (user != null)
             {
-                /*
+                
                  //CHEQUEA QUE EL MAIL NO ESTA EN USO
-                 Usuario emailcheck = db.Usuario.Where(a => a.email == usuario.email).FirstOrDefault();
+                 Usuario emailcheck = db.Usuario.Where(a => ((a.email == usuario.email)&&(a.id_usuario!=id))).FirstOrDefault();
                  if (emailcheck != null)
-                 {
+                 {  
                      MensajeError = "El email " + usuario.email + " ya se encuentra registrado";
                      return BadRequest(MensajeError);
                  }
                  //CHEQUEA QUE EL NOMBRE DE USUARIO NO ESTE EN USO
-                 Usuario usercheck = db.Usuario.Where(a => a.nickname == usuario.nickname).FirstOrDefault();
+                 Usuario usercheck = db.Usuario.Where(a => (a.nickname == usuario.nickname) && (a.id_usuario != id)).FirstOrDefault();
                  if (usercheck != null)
                  {
                      MensajeError = "El usuario " + usuario.nickname + " ya se encuentra registrado";
                      return BadRequest(MensajeError);
                  }
-                 */
+                 
                 user.nickname = usuario.nickname;
                 user.nombre = usuario.nombre;
                 user.apellido = usuario.apellido;
@@ -92,7 +94,8 @@ namespace News.Controllers
             {
                 if (!UsuarioExists(id))
                 {
-                    return NotFound();
+                    MensajeError = "NO SE ENCUENTRA UN USUARIO CON ESTE ID";
+                    return BadRequest(MensajeError);
                 }
                 else
                 {
@@ -102,6 +105,8 @@ namespace News.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
+
+
 
         [HttpGet]
         [Route("api/Users/act")]
@@ -256,19 +261,19 @@ namespace News.Controllers
         private void EnviarMailVerificador(string email, string tkn)
         {
             var UrlVerifica = "/Verifica/" + tkn;
-            //var UrlSite = "https://localhost:44331/Bundles";
-            var UrlSite = "https://fullviajesdemo.azurewebsites.net/Bundles";
+            var UrlSite = "https://localhost:44385/Bundles";
+            //var UrlSite = "https://fullviajesdemo.azurewebsites.net/Bundles";
             var link = UrlSite + UrlVerifica;
 
-            var DesdeEmail = new MailAddress("fullviajestest@m3s.com.ar", "FullViajes Registro de Usuarios");
+            var DesdeEmail = new MailAddress("correo NEEEEEEEw", "Union Square Learning. New Register");//PONER EL CORREO
             var HaciaEmail = new MailAddress(email);
-            var DesdeEmailPassword = "fullviajesprueba";
-            string subject = "Su cuenta el Full Viajes se ha creado satisfactoriamente";
+            var DesdeEmailPassword = "Union Square Learning";//PONER PASSWORD QUE VA 
+            string subject = "Your accound at Union Square Learning was registered successfully";
 
             string body = "<br/><br/>Estamos muy alegres que te hayas registrado en FullViajes. Su cuenta ha sido creada correctamente pero debe verificar su mail para activar la cuenta" +
                 "Debe hacer click en el siguiente vinculo para poder acceder " +
-                " <br/><br/><a href='" + link + "'>" + link + "</a> ";
-
+                " <br/><br/><a href='" + link + "'>" + link + "</a> ";  //texto para el correo
+            
             var smtp = new SmtpClient
             {
                 Host = "smtp.gmail.com",
@@ -344,13 +349,17 @@ namespace News.Controllers
         }
 
         // DELETE: api/Users/5
+        [Route("api/Users/DelUser")]
+        [HttpDelete]
         [ResponseType(typeof(Usuario))]
-        public IHttpActionResult DeleteUsuario(long id)
+        public IHttpActionResult DelUser(long id)
         {
+            string MensajeError = "Error";
             Usuario usuario = db.Usuario.Find(id);
             if (usuario == null)
             {
-                return NotFound();
+                MensajeError = "User not found";
+                return BadRequest(MensajeError);
             }
 
             db.Usuario.Remove(usuario);

@@ -16,8 +16,8 @@ namespace News.Models
     {
         public long id_categoria { get; set; }
         public string nombre { get; set; }
-        public Nullable<byte> portada { get; set; }
-        public Nullable<byte> hide { get; set; }
+        public byte portada { get; set; }
+        public byte hide { get; set; }
     
         public virtual Categoria Categoria1 { get; set; }
         public virtual Categoria Categoria2 { get; set; }

@@ -7,6 +7,7 @@ using System.Net;
 using News.Models;
 using System.Security.Cryptography;
 using System.Text;
+using System.Web.Http.Cors;
 
 //CLASE PARA ENCRIPTAR EL PASSWORD DEL USUARIO
 public class Encrypt
@@ -25,7 +26,7 @@ public class Encrypt
 }
 
 
-namespace FullViajes.Controllers
+namespace News.Controllers
 {
     public class UsuarioController : Controller
     {

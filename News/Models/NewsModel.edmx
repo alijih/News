@@ -4,15 +4,15 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="NewsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="NewsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Categoria">
           <Key>
             <PropertyRef Name="id_categoria" />
           </Key>
           <Property Name="id_categoria" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="portada" Type="tinyint" />
-          <Property Name="hide" Type="tinyint" />
+          <Property Name="portada" Type="tinyint" Nullable="false" />
+          <Property Name="hide" Type="tinyint" Nullable="false" />
         </EntityType>
         <EntityType Name="Noticia">
           <Key>
@@ -27,6 +27,7 @@
           <Property Name="foto_noticia" Type="nchar" MaxLength="250" />
           <Property Name="portada" Type="tinyint" Nullable="false" />
           <Property Name="hide" Type="tinyint" Nullable="false" />
+          <Property Name="date" Type="nchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="Portada">
           <Key>
@@ -89,8 +90,7 @@
             <End Role="Noticia" EntitySet="Noticia" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="NewsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -100,8 +100,8 @@
           </Key>
           <Property Name="id_categoria" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="portada" Type="Byte" />
-          <Property Name="hide" Type="Byte" />
+          <Property Name="portada" Type="Byte" Nullable="false" />
+          <Property Name="hide" Type="Byte" Nullable="false" />
           <NavigationProperty Name="Categoria1" Relationship="Self.FK_Categoria_Categoria" FromRole="Categoria" ToRole="Categoria1" />
           <NavigationProperty Name="Categoria2" Relationship="Self.FK_Categoria_Categoria" FromRole="Categoria1" ToRole="Categoria" />
           <NavigationProperty Name="Noticia" Relationship="Self.FK_Noticia_Categoria" FromRole="Categoria" ToRole="Noticia" />
@@ -120,6 +120,7 @@
           <Property Name="portada" Type="Byte" Nullable="false" />
           <Property Name="hide" Type="Byte" Nullable="false" />
           <NavigationProperty Name="Categoria" Relationship="Self.FK_Noticia_Categoria" FromRole="Noticia" ToRole="Categoria" />
+          <Property Name="date" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="Portada">
           <Key>
@@ -201,6 +202,7 @@
           <EntitySetMapping Name="Noticia">
             <EntityTypeMapping TypeName="NewsModel.Noticia">
               <MappingFragment StoreEntitySet="Noticia">
+                <ScalarProperty Name="date" ColumnName="date" />
                 <ScalarProperty Name="id_noticia" ColumnName="id_noticia" />
                 <ScalarProperty Name="id_categoria" ColumnName="id_categoria" />
                 <ScalarProperty Name="titulo" ColumnName="titulo" />

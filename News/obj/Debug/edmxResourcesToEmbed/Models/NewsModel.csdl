@@ -6,8 +6,8 @@
     </Key>
     <Property Name="id_categoria" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="portada" Type="Byte" />
-    <Property Name="hide" Type="Byte" />
+    <Property Name="portada" Type="Byte" Nullable="false" />
+    <Property Name="hide" Type="Byte" Nullable="false" />
     <NavigationProperty Name="Categoria1" Relationship="Self.FK_Categoria_Categoria" FromRole="Categoria" ToRole="Categoria1" />
     <NavigationProperty Name="Categoria2" Relationship="Self.FK_Categoria_Categoria" FromRole="Categoria1" ToRole="Categoria" />
     <NavigationProperty Name="Noticia" Relationship="Self.FK_Noticia_Categoria" FromRole="Categoria" ToRole="Noticia" />
@@ -26,6 +26,7 @@
     <Property Name="portada" Type="Byte" Nullable="false" />
     <Property Name="hide" Type="Byte" Nullable="false" />
     <NavigationProperty Name="Categoria" Relationship="Self.FK_Noticia_Categoria" FromRole="Noticia" ToRole="Categoria" />
+    <Property Name="date" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
   </EntityType>
   <EntityType Name="Portada">
     <Key>

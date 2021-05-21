@@ -16,7 +16,7 @@ namespace News.Controllers
     public class NoticiasController : ApiController
     {
         private NewsEntities db = new NewsEntities();
-
+        public string MessaError { get; private set; }
         // GET: api/Noticias
         public IQueryable<Noticia> GetNoticia() //DEVUELVE TODAS LAS NOTICIAS
         {
@@ -36,10 +36,13 @@ namespace News.Controllers
             return Ok(noticia);
         }
 
+        [Route("api/Noticias/edit")]
         // PUT: api/Noticias/5       
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutNoticia(long id, Noticia noticia)//MODIFICA UNA NOTICIA
+        public IHttpActionResult edit(long id, Noticia noticia)//MODIFICA UNA NOTICIA
         {
+            string MensajeError = "Error";
+            Noticia noti = db.Noticia.Where(a => a.id_categoria == id).FirstOrDefault();
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -49,6 +52,17 @@ namespace News.Controllers
             {
                 return BadRequest();
             }
+
+            noti.id_categoria = noticia.id_categoria;
+            noti.titulo = noticia.titulo;
+            noti.subtitulo = noticia.subtitulo;
+            noti.descripcion = noticia.descripcion;
+            noti.foto_portada = noticia.foto_portada;
+            noti.foto_noticia = noticia.foto_noticia;
+            noti.portada = noticia.portada;
+            noti.hide = noticia.hide;
+            db.Entry(noti).State = EntityState.Modified;
+
 
             db.Entry(noticia).State = EntityState.Modified;
 
@@ -60,7 +74,9 @@ namespace News.Controllers
             {
                 if (!NoticiaExists(id))
                 {
-                    return NotFound();
+                    MensajeError = "NO SE ENCUENTRA NOTICIA CON ESTE ID";
+                    return BadRequest(MensajeError);
+        
                 }
                 else
                 {
@@ -71,29 +87,43 @@ namespace News.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+
+
+
+        [Route("api/Noticias/register")]
         // POST: api/Noticias
         [ResponseType(typeof(Noticia))]
-        public IHttpActionResult PostNoticia(Noticia noticia)   //AGREGA UNA NOTICIA
+        public IHttpActionResult register(Noticia noticia)   //AGREGA UNA NOTICIA
         {
+            string MensajeError = "Error";
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+            else
+            {
+                //CREAR CARPETA DE ARCHIVO 
 
-            db.Noticia.Add(noticia);
-            db.SaveChanges();
-
+                db.Noticia.Add(noticia);
+                db.SaveChanges();
+            }
             return CreatedAtRoute("DefaultApi", new { id = noticia.id_noticia }, noticia);
         }
 
+
+
+
+        [Route("api/Noticias/DeleteNoticia")]
         // DELETE: api/Noticias/5
         [ResponseType(typeof(Noticia))]   //BORRA UNA NOTICIA
         public IHttpActionResult DeleteNoticia(long id)
         {
             Noticia noticia = db.Noticia.Find(id);
+            string MensajeError = "Error";
             if (noticia == null)
             {
-                return NotFound();
+                MensajeError = "User not found";
+                return BadRequest(MensajeError);
             }
 
             db.Noticia.Remove(noticia);

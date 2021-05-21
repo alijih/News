@@ -15,10 +15,10 @@ namespace News.Controllers
         private IHttpActionResult Enviar(Consulta Form)
         {
             string MensajeError = "Error";
-            var DesdeEmail = new MailAddress("fullviajescontact@gmail.com", "contacto");
-            var HaciaEmail = new MailAddress("fullviajescontact@gmail.com");
-            var DesdeEmailPassword = "wgoyrygvusejvlcg";
-            string subject = "Consulta de " + Form.nombre + " en FullViajes ";
+            var DesdeEmail = new MailAddress("unionsquarelearning@gmail.com", "contacto");
+            var HaciaEmail = new MailAddress("unionsquarelearning@gmail.com");
+            var DesdeEmailPassword = "gohkxuidaofxrrkp";
+            string subject = "Consulta de " + Form.nombre + " en Union Square Learning ";
 
             string body = "<br/><br/>" + Form.consulta + "<br/><br/>" + "Contestar a: " + Form.correo;
 

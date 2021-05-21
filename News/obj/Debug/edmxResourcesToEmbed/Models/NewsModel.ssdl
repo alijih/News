@@ -6,8 +6,8 @@
     </Key>
     <Property Name="id_categoria" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
-    <Property Name="portada" Type="tinyint" />
-    <Property Name="hide" Type="tinyint" />
+    <Property Name="portada" Type="tinyint" Nullable="false" />
+    <Property Name="hide" Type="tinyint" Nullable="false" />
   </EntityType>
   <EntityType Name="Noticia">
     <Key>
@@ -22,6 +22,7 @@
     <Property Name="foto_noticia" Type="nchar" MaxLength="250" />
     <Property Name="portada" Type="tinyint" Nullable="false" />
     <Property Name="hide" Type="tinyint" Nullable="false" />
+    <Property Name="date" Type="nchar" MaxLength="10" />
   </EntityType>
   <EntityType Name="Portada">
     <Key>

@@ -187,7 +187,9 @@ namespace News.Controllers
                 try
                 {
                     db.SaveChanges();
-                    return NotFound();
+                    return Ok();
+                    //return NotFound();
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -265,9 +267,9 @@ namespace News.Controllers
             //var UrlSite = "https://fullviajesdemo.azurewebsites.net/Bundles";
             var link = UrlSite + UrlVerifica;
 
-            var DesdeEmail = new MailAddress("correo NEEEEEEEw", "Union Square Learning. New Register");//PONER EL CORREO
+            var DesdeEmail = new MailAddress("unionsquarelearning@gmail.com", "Union Square Learning. New Register");//PONER EL CORREO
             var HaciaEmail = new MailAddress(email);
-            var DesdeEmailPassword = "Union Square Learning";//PONER PASSWORD QUE VA 
+            var DesdeEmailPassword = "gohkxuidaofxrrkp"; 
             string subject = "Your accound at Union Square Learning was registered successfully";
 
             string body = "<br/><br/>Estamos muy alegres que te hayas registrado en FullViajes. Su cuenta ha sido creada correctamente pero debe verificar su mail para activar la cuenta" +

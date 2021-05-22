@@ -41,19 +41,17 @@ namespace News.Controllers
 
         [HttpPost]
         // PUT: api/Categorias/5
+        [Route("api/Categorias/edit")]
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutCategoria(long id, Categoria categoria)
+        public IHttpActionResult edit(long id, Categoria categoria)
         {
             string MensajeError = "Error";
+            Categoria cat = db.Categoria.Where(a => a.id_categoria == id).FirstOrDefault();
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != categoria.id_categoria)
-            {
-                return BadRequest();
-            }
             //CHEQUEA QUE EL NOMBRE DE USUARIO NO ESTE EN USO
             Categoria categorycheck = db.Categoria.Where(a => (a.nombre == categoria.nombre) && (a.id_categoria != id)).FirstOrDefault();
             if (categorycheck != null)
@@ -61,7 +59,11 @@ namespace News.Controllers
                 MensajeError = "CATEGORIA YA EXISTE";
                 return BadRequest(MensajeError);
             }
-            db.Entry(categoria).State = EntityState.Modified;
+            cat.nombre = categoria.nombre;
+            cat.portada = categoria.portada;
+            cat.hide = categoria.hide;
+
+            db.Entry(cat).State = EntityState.Modified;
 
             try
             {
@@ -109,11 +111,20 @@ namespace News.Controllers
         [ResponseType(typeof(Categoria))]
         public IHttpActionResult DeleteCategoria(long id)
         {
+            string MensajeError = "Error";
+
             Categoria categoria = db.Categoria.Find(id);
             if (categoria == null)
             {
                 return NotFound();
             }
+
+            if (!CanDelete(id))
+            {
+                MensajeError = "NO SE PUEDE BORRAR CONTIENE NOTICIAS";
+                return BadRequest(MensajeError);
+            }
+
 
             db.Categoria.Remove(categoria);
             db.SaveChanges();
@@ -134,5 +145,19 @@ namespace News.Controllers
         {
             return db.Categoria.Count(e => e.id_categoria == id) > 0;
         }
+
+
+      
+        private bool CanDelete(long id) {
+            bool respuesta = true;
+            Noticia noticias= db.Noticia.Where(n => (n.id_categoria == id)).FirstOrDefault();
+            if (noticias != null)
+            {
+                respuesta = false;
+                return respuesta;
+            }
+            return respuesta; }
+
+
     }
 }

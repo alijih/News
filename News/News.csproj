@@ -289,6 +289,12 @@
       <DependentUpon>NewsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CategoriaPartial.cs" />
+    <Compile Include="Models\Noticia.cs">
+      <DependentUpon>NewsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Portada.cs">
+      <DependentUpon>NewsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UsuarioPartial.cs" />
     <Compile Include="Models\consulta.cs" />
     <Compile Include="Models\NewsModel.Context.cs">
@@ -305,12 +311,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>NewsModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Noticia.cs">
-      <DependentUpon>NewsModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Portada.cs">
-      <DependentUpon>NewsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Usuario.cs">
       <DependentUpon>NewsModel.tt</DependentUpon>

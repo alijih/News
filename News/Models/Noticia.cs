@@ -23,9 +23,7 @@ namespace News.Models
         public string foto_noticia { get; set; }
         public byte portada { get; set; }
         public byte hide { get; set; }
-        public string date { get; set; }
+        public System.DateTime date { get; set; }
         public string video_noticia { get; set; }
-    
-        public virtual Categoria Categoria { get; set; }
     }
 }

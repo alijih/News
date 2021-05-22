@@ -104,7 +104,14 @@ namespace News.Controllers
             }
             else
             {
-                //CREAR CARPETA DE ARCHIVO 
+                Categoria categoriacheck= db.Categoria.Where(c => c.id_categoria == noticia.id_categoria).FirstOrDefault();
+                if (categoriacheck == null)
+                {
+                    MensajeError = "CATEGORIA NO EXISTE";
+                    return BadRequest(MensajeError);
+                }
+
+                                                                    //CREAR CARPETA DE ARCHIVO 
 
                 db.Noticia.Add(noticia);
                 db.SaveChanges();

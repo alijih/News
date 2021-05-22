@@ -1,49 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="NewsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityContainer Name="NewsEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Usuario" EntityType="NewsModel.Usuario" />
     <EntitySet Name="Categoria" EntityType="NewsModel.Categoria" />
     <EntitySet Name="Noticia" EntityType="NewsModel.Noticia" />
     <EntitySet Name="Portada" EntityType="NewsModel.Portada" />
-    <EntitySet Name="Usuario" EntityType="NewsModel.Usuario" />
-    <AssociationSet Name="FK_Noticia_Categoria" Association="NewsModel.FK_Noticia_Categoria">
-      <End Role="Categoria" EntitySet="Categoria" />
-      <End Role="Noticia" EntitySet="Noticia" />
-    </AssociationSet>
   </EntityContainer>
-  <EntityType Name="Categoria">
-    <Key>
-      <PropertyRef Name="id_categoria" />
-    </Key>
-    <Property Name="id_categoria" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="portada" Type="Byte" Nullable="false" />
-    <Property Name="hide" Type="Byte" Nullable="false" />
-    <NavigationProperty Name="Noticia" Relationship="NewsModel.FK_Noticia_Categoria" FromRole="Categoria" ToRole="Noticia" />
-  </EntityType>
-  <EntityType Name="Noticia">
-    <Key>
-      <PropertyRef Name="id_noticia" />
-    </Key>
-    <Property Name="id_noticia" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="id_categoria" Type="Int64" Nullable="false" />
-    <Property Name="titulo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="subtitulo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="foto_portada" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-    <Property Name="foto_noticia" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
-    <Property Name="portada" Type="Byte" Nullable="false" />
-    <Property Name="hide" Type="Byte" Nullable="false" />
-    <Property Name="date" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="video_noticia" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Categoria" Relationship="NewsModel.FK_Noticia_Categoria" FromRole="Noticia" ToRole="Categoria" />
-  </EntityType>
-  <EntityType Name="Portada">
-    <Key>
-      <PropertyRef Name="id_portada" />
-    </Key>
-    <Property Name="id_portada" Type="Int32" Nullable="false" />
-    <Property Name="cantidad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-  </EntityType>
   <EntityType Name="Usuario">
     <Key>
       <PropertyRef Name="id_usuario" />
@@ -60,16 +22,36 @@
     <Property Name="active" Type="Boolean" />
     <Property Name="token" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
   </EntityType>
-  <Association Name="FK_Noticia_Categoria">
-    <End Type="NewsModel.Categoria" Role="Categoria" Multiplicity="1" />
-    <End Type="NewsModel.Noticia" Role="Noticia" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Categoria">
-        <PropertyRef Name="id_categoria" />
-      </Principal>
-      <Dependent Role="Noticia">
-        <PropertyRef Name="id_categoria" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
+  <EntityType Name="Categoria">
+    <Key>
+      <PropertyRef Name="id_categoria" />
+    </Key>
+    <Property Name="id_categoria" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="portada" Type="Byte" Nullable="false" />
+    <Property Name="hide" Type="Byte" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Noticia">
+    <Key>
+      <PropertyRef Name="id_noticia" />
+    </Key>
+    <Property Name="id_noticia" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_categoria" Type="Int64" Nullable="false" />
+    <Property Name="titulo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="subtitulo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="foto_portada" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="foto_noticia" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="portada" Type="Byte" Nullable="false" />
+    <Property Name="hide" Type="Byte" Nullable="false" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="video_noticia" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Portada">
+    <Key>
+      <PropertyRef Name="id_portada" />
+    </Key>
+    <Property Name="id_portada" Type="Int32" Nullable="false" />
+    <Property Name="cantidad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
 </Schema>

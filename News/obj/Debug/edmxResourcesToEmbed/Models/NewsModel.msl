@@ -1,6 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="NewsModelStoreContainer" CdmEntityContainer="NewsEntities">
+    <EntitySetMapping Name="Usuario">
+      <EntityTypeMapping TypeName="NewsModel.Usuario">
+        <MappingFragment StoreEntitySet="Usuario">
+          <ScalarProperty Name="token" ColumnName="token" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="apellido" ColumnName="apellido" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="user_descripcion" ColumnName="user_descripcion" />
+          <ScalarProperty Name="user_foto" ColumnName="user_foto" />
+          <ScalarProperty Name="rol" ColumnName="rol" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="nickname" ColumnName="nickname" />
+          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Categoria">
       <EntityTypeMapping TypeName="NewsModel.Categoria">
         <MappingFragment StoreEntitySet="Categoria">
@@ -33,23 +50,6 @@
         <MappingFragment StoreEntitySet="Portada">
           <ScalarProperty Name="cantidad" ColumnName="cantidad" />
           <ScalarProperty Name="id_portada" ColumnName="id_portada" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Usuario">
-      <EntityTypeMapping TypeName="NewsModel.Usuario">
-        <MappingFragment StoreEntitySet="Usuario">
-          <ScalarProperty Name="token" ColumnName="token" />
-          <ScalarProperty Name="active" ColumnName="active" />
-          <ScalarProperty Name="apellido" ColumnName="apellido" />
-          <ScalarProperty Name="nombre" ColumnName="nombre" />
-          <ScalarProperty Name="user_descripcion" ColumnName="user_descripcion" />
-          <ScalarProperty Name="user_foto" ColumnName="user_foto" />
-          <ScalarProperty Name="rol" ColumnName="rol" />
-          <ScalarProperty Name="password" ColumnName="password" />
-          <ScalarProperty Name="email" ColumnName="email" />
-          <ScalarProperty Name="nickname" ColumnName="nickname" />
-          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

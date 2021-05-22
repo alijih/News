@@ -14,18 +14,9 @@ namespace News.Models
     
     public partial class Categoria
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Categoria()
-        {
-            this.Noticia = new HashSet<Noticia>();
-        }
-    
         public long id_categoria { get; set; }
         public string nombre { get; set; }
         public byte portada { get; set; }
         public byte hide { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Noticia> Noticia { get; set; }
     }
 }

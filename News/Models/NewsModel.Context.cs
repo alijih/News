@@ -25,9 +25,9 @@ namespace News.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<Categoria> Categoria { get; set; }
         public virtual DbSet<Noticia> Noticia { get; set; }
         public virtual DbSet<Portada> Portada { get; set; }
-        public virtual DbSet<Usuario> Usuario { get; set; }
     }
 }

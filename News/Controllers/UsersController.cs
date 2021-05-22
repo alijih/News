@@ -19,13 +19,13 @@ namespace News.Controllers
     {
         private NewsEntities db = new NewsEntities();
         public string MessaError { get; private set; }
-
+        [HttpGet]
         // GET: api/Users
         public IQueryable<Usuario> GetUsuario()
         {
             return db.Usuario.Where(u => u.nickname != "nahadjq");
         }
-
+        [HttpGet]
         // GET: api/Users/5
         [ResponseType(typeof(Usuario))]
         public IHttpActionResult GetUsuario(long id)
@@ -41,6 +41,7 @@ namespace News.Controllers
         }
 
         // PUT: api/Users/5
+        [HttpPost]
         [Route("api/Users/edit")]
         [ResponseType(typeof(void))]
         public IHttpActionResult edit(long id, Usuario usuario)

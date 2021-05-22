@@ -4,51 +4,52 @@
     <EntitySetMapping Name="Categoria">
       <EntityTypeMapping TypeName="NewsModel.Categoria">
         <MappingFragment StoreEntitySet="Categoria">
-          <ScalarProperty Name="id_categoria" ColumnName="id_categoria" />
-          <ScalarProperty Name="nombre" ColumnName="nombre" />
-          <ScalarProperty Name="portada" ColumnName="portada" />
           <ScalarProperty Name="hide" ColumnName="hide" />
+          <ScalarProperty Name="portada" ColumnName="portada" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="id_categoria" ColumnName="id_categoria" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Noticia">
       <EntityTypeMapping TypeName="NewsModel.Noticia">
         <MappingFragment StoreEntitySet="Noticia">
+          <ScalarProperty Name="video_noticia" ColumnName="video_noticia" />
           <ScalarProperty Name="date" ColumnName="date" />
-          <ScalarProperty Name="id_noticia" ColumnName="id_noticia" />
-          <ScalarProperty Name="id_categoria" ColumnName="id_categoria" />
-          <ScalarProperty Name="titulo" ColumnName="titulo" />
-          <ScalarProperty Name="subtitulo" ColumnName="subtitulo" />
-          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-          <ScalarProperty Name="foto_portada" ColumnName="foto_portada" />
-          <ScalarProperty Name="foto_noticia" ColumnName="foto_noticia" />
-          <ScalarProperty Name="portada" ColumnName="portada" />
           <ScalarProperty Name="hide" ColumnName="hide" />
+          <ScalarProperty Name="portada" ColumnName="portada" />
+          <ScalarProperty Name="foto_noticia" ColumnName="foto_noticia" />
+          <ScalarProperty Name="foto_portada" ColumnName="foto_portada" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="subtitulo" ColumnName="subtitulo" />
+          <ScalarProperty Name="titulo" ColumnName="titulo" />
+          <ScalarProperty Name="id_categoria" ColumnName="id_categoria" />
+          <ScalarProperty Name="id_noticia" ColumnName="id_noticia" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Portada">
       <EntityTypeMapping TypeName="NewsModel.Portada">
         <MappingFragment StoreEntitySet="Portada">
-          <ScalarProperty Name="id_portada" ColumnName="id_portada" />
           <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="id_portada" ColumnName="id_portada" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Usuario">
       <EntityTypeMapping TypeName="NewsModel.Usuario">
         <MappingFragment StoreEntitySet="Usuario">
-          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
-          <ScalarProperty Name="nickname" ColumnName="nickname" />
-          <ScalarProperty Name="email" ColumnName="email" />
-          <ScalarProperty Name="password" ColumnName="password" />
-          <ScalarProperty Name="rol" ColumnName="rol" />
-          <ScalarProperty Name="user_foto" ColumnName="user_foto" />
-          <ScalarProperty Name="user_descripcion" ColumnName="user_descripcion" />
-          <ScalarProperty Name="nombre" ColumnName="nombre" />
-          <ScalarProperty Name="apellido" ColumnName="apellido" />
-          <ScalarProperty Name="active" ColumnName="active" />
           <ScalarProperty Name="token" ColumnName="token" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="apellido" ColumnName="apellido" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="user_descripcion" ColumnName="user_descripcion" />
+          <ScalarProperty Name="user_foto" ColumnName="user_foto" />
+          <ScalarProperty Name="rol" ColumnName="rol" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="nickname" ColumnName="nickname" />
+          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

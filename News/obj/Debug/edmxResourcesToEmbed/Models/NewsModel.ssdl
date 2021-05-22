@@ -18,11 +18,12 @@
     <Property Name="titulo" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="subtitulo" Type="varchar" MaxLength="50" />
     <Property Name="descripcion" Type="text" Nullable="false" />
-    <Property Name="foto_portada" Type="varchar" MaxLength="250" Nullable="false" />
-    <Property Name="foto_noticia" Type="nchar" MaxLength="250" />
+    <Property Name="foto_portada" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="foto_noticia" Type="nchar" MaxLength="500" />
     <Property Name="portada" Type="tinyint" Nullable="false" />
     <Property Name="hide" Type="tinyint" Nullable="false" />
-    <Property Name="date" Type="nchar" MaxLength="10" />
+    <Property Name="date" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="video_noticia" Type="varchar" MaxLength="500" />
   </EntityType>
   <EntityType Name="Portada">
     <Key>
@@ -47,27 +48,15 @@
     <Property Name="active" Type="bit" />
     <Property Name="token" Type="varchar" MaxLength="100" />
   </EntityType>
-  <Association Name="FK_Categoria_Categoria">
-    <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
-    <End Role="Categoria1" Type="Self.Categoria" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Categoria">
-        <PropertyRef Name="id_categoria" />
-      </Principal>
-      <Dependent Role="Categoria1">
-        <PropertyRef Name="id_categoria" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Noticia_Categoria">
     <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
-    <End Role="Noticia" Type="Self.Noticia" Multiplicity="0..1" />
+    <End Role="Noticia" Type="Self.Noticia" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Categoria">
         <PropertyRef Name="id_categoria" />
       </Principal>
       <Dependent Role="Noticia">
-        <PropertyRef Name="id_noticia" />
+        <PropertyRef Name="id_categoria" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -76,10 +65,6 @@
     <EntitySet Name="Noticia" EntityType="Self.Noticia" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Portada" EntityType="Self.Portada" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK_Categoria_Categoria" Association="Self.FK_Categoria_Categoria">
-      <End Role="Categoria" EntitySet="Categoria" />
-      <End Role="Categoria1" EntitySet="Categoria" />
-    </AssociationSet>
     <AssociationSet Name="FK_Noticia_Categoria" Association="Self.FK_Noticia_Categoria">
       <End Role="Categoria" EntitySet="Categoria" />
       <End Role="Noticia" EntitySet="Noticia" />

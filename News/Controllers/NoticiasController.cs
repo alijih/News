@@ -18,11 +18,13 @@ namespace News.Controllers
         private NewsEntities db = new NewsEntities();
         public string MessaError { get; private set; }
         // GET: api/Noticias
+        [HttpGet]
         public IQueryable<Noticia> GetNoticia() //DEVUELVE TODAS LAS NOTICIAS
         {
             return db.Noticia;
         }
 
+        [HttpGet]
         // GET: api/Noticias/5   
         [ResponseType(typeof(Noticia))]
         public IHttpActionResult GetNoticia(long id)// BUSCA UNA NOTICIA EN PARTICULAR CON UN ID

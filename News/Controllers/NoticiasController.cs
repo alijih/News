@@ -29,30 +29,38 @@ namespace News.Controllers
         [ResponseType(typeof(Noticia))]
         public IHttpActionResult GetNoticia(long id)// BUSCA UNA NOTICIA EN PARTICULAR CON UN ID
         {
-            Noticia noticia = db.Noticia.Find(id);
-            if (noticia == null)
+            Noticia noti = db.Noticia.Where(a => a.id_noticia == id).FirstOrDefault();
+            if (noti == null)
             {
                 return NotFound();
             }
 
-            return Ok(noticia);
+            return Ok(noti);
         }
 
         [Route("api/Noticias/edit")]
         // PUT: api/Noticias/5       
         [ResponseType(typeof(void))]
-        public IHttpActionResult edit(long id, Noticia noticia)//MODIFICA UNA NOTICIA
+        public IHttpActionResult edit(long id, Noticia noticia )//MODIFICA UNA NOTICIA
         {
             string MensajeError = "Error";
-            Noticia noti = db.Noticia.Where(a => a.id_categoria == id).FirstOrDefault();
+
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                MensajeError = "MAL EL MODELSTATE";
+                return BadRequest(MensajeError);
             }
 
-            if (id != noticia.id_noticia)
+            Noticia noti = db.Noticia.Where(a => a.id_noticia == id).FirstOrDefault();
+            if (noti == null)
             {
-                return BadRequest();
+                MensajeError = "NO SE ENCUENTRA NOTICIA CON ESTE ID";
+                return BadRequest(MensajeError);
+            }
+            if (id != noti.id_noticia)
+            {
+                MensajeError = "DIFERENTES ID";
+                return BadRequest(MensajeError);
             }
 
             noti.id_categoria = noticia.id_categoria;
@@ -61,12 +69,13 @@ namespace News.Controllers
             noti.descripcion = noticia.descripcion;
             noti.foto_portada = noticia.foto_portada;
             noti.foto_noticia = noticia.foto_noticia;
+            noti.video_noticia = noticia.video_noticia;
+            //DATE E ID FALTA
             noti.portada = noticia.portada;
             noti.hide = noticia.hide;
             db.Entry(noti).State = EntityState.Modified;
 
 
-            db.Entry(noticia).State = EntityState.Modified;
 
             try
             {

@@ -53,5 +53,9 @@
     </Key>
     <Property Name="id_portada" Type="Int32" Nullable="false" />
     <Property Name="cantidad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="latest" Type="Int64" Nullable="false" />
+    <Property Name="latestr" Type="Int64" Nullable="false" />
+    <Property Name="nombre" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="igual" Type="Int32" Nullable="false" />
   </EntityType>
 </Schema>

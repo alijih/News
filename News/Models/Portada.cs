@@ -16,5 +16,9 @@ namespace News.Models
     {
         public int id_portada { get; set; }
         public int cantidad { get; set; }
+        public long latest { get; set; }
+        public long latestr { get; set; }
+        public string nombre { get; set; }
+        public int igual { get; set; }
     }
 }

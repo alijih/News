@@ -48,6 +48,10 @@
     <EntitySetMapping Name="Portada">
       <EntityTypeMapping TypeName="NewsModel.Portada">
         <MappingFragment StoreEntitySet="Portada">
+          <ScalarProperty Name="igual" ColumnName="igual" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="latestr" ColumnName="latestr" />
+          <ScalarProperty Name="latest" ColumnName="latest" />
           <ScalarProperty Name="cantidad" ColumnName="cantidad" />
           <ScalarProperty Name="id_portada" ColumnName="id_portada" />
         </MappingFragment>

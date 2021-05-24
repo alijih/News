@@ -35,7 +35,11 @@
             <PropertyRef Name="id_portada" />
           </Key>
           <Property Name="id_portada" Type="int" Nullable="false" />
-          <Property Name="cantidad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cantidad" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="latest" Type="bigint" Nullable="false" />
+          <Property Name="latestr" Type="bigint" Nullable="false" />
+          <Property Name="nombre" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="igual" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -116,6 +120,10 @@
           </Key>
           <Property Name="id_portada" Type="Int32" Nullable="false" />
           <Property Name="cantidad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="latest" Type="Int64" Nullable="false" />
+          <Property Name="latestr" Type="Int64" Nullable="false" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="igual" Type="Int32" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -170,6 +178,10 @@
           <EntitySetMapping Name="Portada">
             <EntityTypeMapping TypeName="NewsModel.Portada">
               <MappingFragment StoreEntitySet="Portada">
+                <ScalarProperty Name="igual" ColumnName="igual" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="latestr" ColumnName="latestr" />
+                <ScalarProperty Name="latest" ColumnName="latest" />
                 <ScalarProperty Name="cantidad" ColumnName="cantidad" />
                 <ScalarProperty Name="id_portada" ColumnName="id_portada" />
               </MappingFragment>

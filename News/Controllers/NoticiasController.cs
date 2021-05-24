@@ -17,6 +17,8 @@ namespace News.Controllers
     {
         private NewsEntities db = new NewsEntities();
         public string MessaError { get; private set; }
+
+
         // GET: api/Noticias
         [HttpGet]
         public IQueryable<Noticia> GetNoticia() //DEVUELVE TODAS LAS NOTICIAS
@@ -35,6 +37,44 @@ namespace News.Controllers
                 return NotFound();
             }
 
+            return Ok(noti);
+        }
+
+        [HttpGet]
+        // GET: api/Noticias/5   
+        [ResponseType(typeof(Noticia))]
+        public IHttpActionResult GetLatest()// BUSCA la ultima noticia
+        {   string MensajeError = "Error";
+            Portada port = db.Portada.Where(a => a.nombre == "portada").FirstOrDefault();
+            Noticia noti;
+            noti = db.Noticia.Where(a => a.id_noticia == port.latest).FirstOrDefault(); 
+            //no esta logueado asi que cargo la ultima noticia que se subio habilitada para que vean todos    
+            if (noti == null)
+                {
+                    MensajeError = "AUN NO HAY NOTICIAS";
+                    return BadRequest(MensajeError);
+                }
+                return Ok(noti);
+            }
+
+        [HttpGet]
+        // GET: api/Noticias/5   
+        [ResponseType(typeof(Noticia))]
+        public IHttpActionResult GetLatestR()// BUSCA la ultima noticia
+        {
+            string MensajeError = "Error";
+            Portada port = db.Portada.Where(a => a.nombre == "portada").FirstOrDefault();
+            Noticia noti;
+           if (port.igual == 0) { noti = db.Noticia.Where(a => a.id_noticia == port.latestr).FirstOrDefault(); }
+                //cargo la ultima noticia que era solo para logueados
+                else { noti = db.Noticia.Where(a => a.id_noticia == port.latest).FirstOrDefault(); }
+            //cargo la ultima noticia que era la misma que para los no logueados
+           
+            if (noti == null)
+            {
+                MensajeError = "AUN NO HAY NOTICIAS";
+                return BadRequest(MensajeError);
+            }
             return Ok(noti);
         }
 
@@ -120,9 +160,19 @@ namespace News.Controllers
                     return BadRequest(MensajeError);
                 }
 
-                                                                    //CREAR CARPETA DE ARCHIVO 
-
+                                         //CREAR CARPETA DE ARCHIVO 
+            
+                noticia.date = DateTime.UtcNow;
                 db.Noticia.Add(noticia);
+                db.SaveChanges();
+
+                Noticia notti = db.Noticia.Where(a => a.titulo == noticia.titulo).FirstOrDefault();
+
+                Portada port = db.Portada.Where(a => a.nombre == "portada").FirstOrDefault();
+                if (notti.hide == 0) { port.latestr = notti.id_noticia; port.igual = 0; }
+                else { port.latest = notti.id_noticia; port.igual = 1; }
+                //la guardo en latest
+                db.Entry(port).State = EntityState.Modified;
                 db.SaveChanges();
             }
             return CreatedAtRoute("DefaultApi", new { id = noticia.id_noticia }, noticia);
@@ -163,5 +213,15 @@ namespace News.Controllers
         {
             return db.Noticia.Count(e => e.id_noticia == id) > 0;
         }
-    }
+        
+ 
+       
+    
+       
+       
+            
+           
+       
+    
+}
 }

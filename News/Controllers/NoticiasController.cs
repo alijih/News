@@ -17,6 +17,11 @@ namespace News.Controllers
     {
         private NewsEntities db = new NewsEntities();
         public string MessaError { get; private set; }
+        public class Consulta {
+            long category;
+            string year;
+            string keyword;
+        }
 
 
         // GET: api/Noticias
@@ -31,10 +36,12 @@ namespace News.Controllers
         [ResponseType(typeof(Noticia))]
         public IHttpActionResult GetNoticia(long id)// BUSCA UNA NOTICIA EN PARTICULAR CON UN ID
         {
+            string MensajeError = "Error";
             Noticia noti = db.Noticia.Where(a => a.id_noticia == id).FirstOrDefault();
             if (noti == null)
             {
-                return NotFound();
+                MensajeError = "AUN NO SE ENCONTRO LA NOTICIA";
+                return BadRequest(MensajeError);
             }
 
             return Ok(noti);
@@ -70,6 +77,52 @@ namespace News.Controllers
                 else { noti = db.Noticia.Where(a => a.id_noticia == port.latest).FirstOrDefault(); }
             //cargo la ultima noticia que era la misma que para los no logueados
            
+            if (noti == null)
+            {
+                MensajeError = "AUN NO HAY NOTICIAS";
+                return BadRequest(MensajeError);
+            }
+            return Ok(noti);
+        }
+
+
+        [HttpGet]
+        // GET: api/Noticias/5   
+        [ResponseType(typeof(Noticia))]
+        public IHttpActionResult GetPortada()// BUSCA la ultima noticia
+        {
+            string MensajeError = "Error";
+
+            Noticia noti0 = db.Noticia.Where(n => (n.portada == 1)&&(n.hide==1)).OrderByDescending(x => x.id_noticia).FirstOrDefault();
+            Noticia noti1 = db.Noticia.Where(n => (n.portada == 1) && (n.id_noticia != noti0.id_noticia) && (n.hide == 1)).OrderByDescending(x => x.id_noticia).FirstOrDefault();
+            Noticia noti2 = db.Noticia.Where(n => (n.portada == 1) && (n.id_noticia != noti0.id_noticia) && (n.id_noticia != noti1.id_noticia) && (n.hide == 1)).OrderByDescending(x => x.id_noticia).FirstOrDefault();
+            Noticia noti3 = db.Noticia.Where(n => (n.portada == 1) && (n.id_noticia != noti0.id_noticia) && (n.id_noticia != noti1.id_noticia) && (n.id_noticia != noti2.id_noticia) && (n.hide == 1)).OrderByDescending(x => x.id_noticia).FirstOrDefault();
+            List<Noticia> noti = new List<Noticia>();
+                noti.Add(noti1);
+                noti.Add(noti2);
+                noti.Add(noti3);
+            if (noti == null)
+            {
+                MensajeError = "AUN NO HAY NOTICIAS";
+                return BadRequest(MensajeError);
+            }
+            return Ok(noti);
+        }
+
+        [HttpGet]
+        // GET: api/Noticias/5   
+        [ResponseType(typeof(Noticia))]
+        public IHttpActionResult GetPortadaR()// BUSCA la ultima noticia
+        {
+            string MensajeError = "Error";
+            Noticia noti0 = db.Noticia.Where(n => n.portada == 1).OrderByDescending(x => x.id_noticia).FirstOrDefault();
+            Noticia noti1 = db.Noticia.Where(n => (n.portada == 1) && (n.id_noticia != noti0.id_noticia)).OrderByDescending(x => x.id_noticia).FirstOrDefault();
+            Noticia noti2 = db.Noticia.Where(n => (n.portada == 1) && (n.id_noticia != noti0.id_noticia) && (n.id_noticia != noti1.id_noticia)).OrderByDescending(x => x.id_noticia).FirstOrDefault();
+            Noticia noti3 = db.Noticia.Where(n => (n.portada == 1) && (n.id_noticia != noti0.id_noticia) && (n.id_noticia != noti1.id_noticia) && (n.id_noticia != noti2.id_noticia)).OrderByDescending(x => x.id_noticia).FirstOrDefault();
+            List<Noticia> noti = new List<Noticia>();
+            noti.Add(noti1);
+            noti.Add(noti2);
+            noti.Add(noti3);
             if (noti == null)
             {
                 MensajeError = "AUN NO HAY NOTICIAS";
@@ -162,7 +215,9 @@ namespace News.Controllers
 
                                          //CREAR CARPETA DE ARCHIVO 
             
-                noticia.date = DateTime.UtcNow;
+                //noticia.date = DateTime.Now;
+
+                noticia.date = Convert.ToDateTime(DateTime.Now.ToString("dd-MM-yyyy"));
                 db.Noticia.Add(noticia);
                 db.SaveChanges();
 
@@ -213,15 +268,12 @@ namespace News.Controllers
         {
             return db.Noticia.Count(e => e.id_noticia == id) > 0;
         }
-        
- 
-       
-    
-       
-       
-            
-           
-       
-    
-}
+
+
+
+
+
+
+
+    }
 }

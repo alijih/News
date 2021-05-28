@@ -5,6 +5,9 @@
     <EntitySet Name="Categoria" EntityType="NewsModel.Categoria" />
     <EntitySet Name="Noticia" EntityType="NewsModel.Noticia" />
     <EntitySet Name="Portada" EntityType="NewsModel.Portada" />
+    <EntitySet Name="Fotos" EntityType="NewsModel.Fotos" />
+    <EntitySet Name="Videos" EntityType="NewsModel.Videos" />
+    <EntitySet Name="main" EntityType="NewsModel.main" />
   </EntityContainer>
   <EntityType Name="Usuario">
     <Key>
@@ -57,5 +60,31 @@
     <Property Name="latestr" Type="Int64" Nullable="false" />
     <Property Name="nombre" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
     <Property Name="igual" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Fotos">
+    <Key>
+      <PropertyRef Name="id_foto" />
+    </Key>
+    <Property Name="id_foto" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="url" Type="String" Nullable="false" MaxLength="250" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Videos">
+    <Key>
+      <PropertyRef Name="id_video" />
+    </Key>
+    <Property Name="id_video" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="url" Type="String" Nullable="false" MaxLength="250" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="main">
+    <Key>
+      <PropertyRef Name="whoweare" />
+      <PropertyRef Name="urlwwa" />
+      <PropertyRef Name="autor" />
+      <PropertyRef Name="urlautor" />
+    </Key>
+    <Property Name="whoweare" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="urlwwa" Type="String" Nullable="false" MaxLength="250" FixedLength="true" Unicode="true" />
+    <Property Name="autor" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="urlautor" Type="String" Nullable="false" MaxLength="250" FixedLength="true" Unicode="true" />
   </EntityType>
 </Schema>

@@ -1,8 +1,11 @@
 const links = document.querySelector('.links');
 const hamburguer = document.getElementById('hamburguer');
 const link = document.querySelectorAll('.links a');
-const conten = document.getElementById('conten')
+const conten = document.getElementById('conten');
 
+
+
+conten.style.display="none";
 hamburguer.addEventListener('click', ()=>{
     if(conten.style.display == 'block'){
         conten.style.display = 'none';

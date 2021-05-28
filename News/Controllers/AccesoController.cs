@@ -47,23 +47,23 @@ namespace News.Controllers
                             }
                             else
                             {
-                                oRes.mensaje = "El usuario no se encuentra activo";
+                                oRes.mensaje = "the user is not active";
                             }
                         }
                         else
                         {
-                            oRes.mensaje = "Datos incorrectos";
+                            oRes.mensaje = "wrong password ";
                         }
                     }
                     else
                     {
-                        oRes.mensaje = "Datos incorrectos";
+                        oRes.mensaje = "wrong email";
                     }
                 }
             }
             catch (Exception ex)
             {
-                oRes.mensaje = "Ha ocurrido un error" + ex;
+                oRes.mensaje = "An error has occurred. try again later" + ex;
             }
             return oRes;
         }

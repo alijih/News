@@ -29,5 +29,8 @@ namespace News.Models
         public virtual DbSet<Categoria> Categoria { get; set; }
         public virtual DbSet<Noticia> Noticia { get; set; }
         public virtual DbSet<Portada> Portada { get; set; }
+        public virtual DbSet<Fotos> Fotos { get; set; }
+        public virtual DbSet<Videos> Videos { get; set; }
+        public virtual DbSet<main> main { get; set; }
     }
 }

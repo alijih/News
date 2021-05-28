@@ -151,11 +151,13 @@ namespace News.Controllers
         private bool CanDelete(long id) {
             bool respuesta = true;
             Noticia noticias= db.Noticia.Where(n => (n.id_categoria == id)).FirstOrDefault();
-            if (noticias != null)
-            {
-                respuesta = false;
-                return respuesta;
-            }
+            if (noticias != null){respuesta = false; return respuesta; }
+
+            Categoria notis = db.Categoria.Where(n => (n.id_categoria ==id)).FirstOrDefault();
+            if (notis != null) {
+                if (notis.nombre== "POLICY ANALISYS"|| notis.nombre == "LITERACY") { respuesta = false; return respuesta; }
+                 }
+            
             return respuesta; }
 
 

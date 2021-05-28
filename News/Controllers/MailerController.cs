@@ -16,11 +16,11 @@ namespace News.Controllers
         {
             string MensajeError = "Error";
             var DesdeEmail = new MailAddress("unionsquarelearning@gmail.com", "contacto");
-            var HaciaEmail = new MailAddress("unionsquarelearning@gmail.com");
+            var HaciaEmail = new MailAddress("david@usql.org");
             var DesdeEmailPassword = "gohkxuidaofxrrkp";
-            string subject = "Consulta de " + Form.nombre + " en Union Square Learning ";
+            string subject = "Query of " + Form.nombre + " on the Union Square Learning page";
 
-            string body = "<br/><br/>" + Form.consulta + "<br/><br/>" + "Contestar a: " + Form.correo;
+            string body = "<br/><br/>" + Form.consulta + "<br/><br/>" + "Answer to: " + Form.correo;
 
             var smtp = new SmtpClient
             {

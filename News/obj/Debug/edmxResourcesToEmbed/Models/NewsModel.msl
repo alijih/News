@@ -57,5 +57,31 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Fotos">
+      <EntityTypeMapping TypeName="NewsModel.Fotos">
+        <MappingFragment StoreEntitySet="Fotos">
+          <ScalarProperty Name="url" ColumnName="url" />
+          <ScalarProperty Name="id_foto" ColumnName="id_foto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Videos">
+      <EntityTypeMapping TypeName="NewsModel.Videos">
+        <MappingFragment StoreEntitySet="Videos">
+          <ScalarProperty Name="url" ColumnName="url" />
+          <ScalarProperty Name="id_video" ColumnName="id_video" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="main">
+      <EntityTypeMapping TypeName="NewsModel.main">
+        <MappingFragment StoreEntitySet="main">
+          <ScalarProperty Name="urlautor" ColumnName="urlautor" />
+          <ScalarProperty Name="autor" ColumnName="autor" />
+          <ScalarProperty Name="urlwwa" ColumnName="urlwwa" />
+          <ScalarProperty Name="whoweare" ColumnName="whoweare" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

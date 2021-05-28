@@ -14,6 +14,27 @@
           <Property Name="portada" Type="tinyint" Nullable="false" />
           <Property Name="hide" Type="tinyint" Nullable="false" />
         </EntityType>
+        <EntityType Name="Fotos">
+          <Key>
+            <PropertyRef Name="id_foto" />
+          </Key>
+          <Property Name="id_foto" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="url" Type="nchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'News.dbo.main' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="main">
+          <Key>
+            <PropertyRef Name="whoweare" />
+            <PropertyRef Name="urlwwa" />
+            <PropertyRef Name="autor" />
+            <PropertyRef Name="urlautor" />
+          </Key>
+          <Property Name="whoweare" Type="text" Nullable="false" />
+          <Property Name="urlwwa" Type="nchar" MaxLength="250" Nullable="false" />
+          <Property Name="autor" Type="text" Nullable="false" />
+          <Property Name="urlautor" Type="nchar" MaxLength="250" Nullable="false" />
+        </EntityType>
         <EntityType Name="Noticia">
           <Key>
             <PropertyRef Name="id_noticia" />
@@ -57,11 +78,28 @@
           <Property Name="active" Type="bit" />
           <Property Name="token" Type="varchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="Videos">
+          <Key>
+            <PropertyRef Name="id_video" />
+          </Key>
+          <Property Name="id_video" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="url" Type="nchar" MaxLength="250" Nullable="false" />
+        </EntityType>
         <EntityContainer Name="NewsModelStoreContainer">
           <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fotos" EntityType="Self.Fotos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Noticia" EntityType="Self.Noticia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Portada" EntityType="Self.Portada" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Videos" EntityType="Self.Videos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="main" EntityType="Self.main" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [main].[whoweare] AS [whoweare], 
+    [main].[urlwwa] AS [urlwwa], 
+    [main].[autor] AS [autor], 
+    [main].[urlautor] AS [urlautor]
+    FROM [dbo].[main] AS [main]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -72,6 +110,9 @@
           <EntitySet Name="Categoria" EntityType="NewsModel.Categoria" />
           <EntitySet Name="Noticia" EntityType="NewsModel.Noticia" />
           <EntitySet Name="Portada" EntityType="NewsModel.Portada" />
+          <EntitySet Name="Fotos" EntityType="NewsModel.Fotos" />
+          <EntitySet Name="Videos" EntityType="NewsModel.Videos" />
+          <EntitySet Name="main" EntityType="NewsModel.main" />
           </EntityContainer>
         <EntityType Name="Usuario">
           <Key>
@@ -124,6 +165,32 @@
           <Property Name="latestr" Type="Int64" Nullable="false" />
           <Property Name="nombre" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="igual" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Fotos">
+          <Key>
+            <PropertyRef Name="id_foto" />
+          </Key>
+          <Property Name="id_foto" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="url" Type="String" Nullable="false" MaxLength="250" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Videos">
+          <Key>
+            <PropertyRef Name="id_video" />
+          </Key>
+          <Property Name="id_video" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="url" Type="String" Nullable="false" MaxLength="250" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="main">
+          <Key>
+            <PropertyRef Name="whoweare" />
+            <PropertyRef Name="urlwwa" />
+            <PropertyRef Name="autor" />
+            <PropertyRef Name="urlautor" />
+          </Key>
+          <Property Name="whoweare" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="urlwwa" Type="String" Nullable="false" MaxLength="250" FixedLength="true" Unicode="true" />
+          <Property Name="autor" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="urlautor" Type="String" Nullable="false" MaxLength="250" FixedLength="true" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -184,6 +251,32 @@
                 <ScalarProperty Name="latest" ColumnName="latest" />
                 <ScalarProperty Name="cantidad" ColumnName="cantidad" />
                 <ScalarProperty Name="id_portada" ColumnName="id_portada" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fotos">
+            <EntityTypeMapping TypeName="NewsModel.Fotos">
+              <MappingFragment StoreEntitySet="Fotos">
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="id_foto" ColumnName="id_foto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Videos">
+            <EntityTypeMapping TypeName="NewsModel.Videos">
+              <MappingFragment StoreEntitySet="Videos">
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="id_video" ColumnName="id_video" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="main">
+            <EntityTypeMapping TypeName="NewsModel.main">
+              <MappingFragment StoreEntitySet="main">
+                <ScalarProperty Name="urlautor" ColumnName="urlautor" />
+                <ScalarProperty Name="autor" ColumnName="autor" />
+                <ScalarProperty Name="urlwwa" ColumnName="urlwwa" />
+                <ScalarProperty Name="whoweare" ColumnName="whoweare" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -276,12 +276,15 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccesoController.cs" />
     <Compile Include="Controllers\CategoriasController.cs" />
+    <Compile Include="Controllers\FotosController.cs" />
     <Compile Include="Controllers\MailerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\mainsController.cs" />
     <Compile Include="Controllers\NoticiasController.cs" />
     <Compile Include="Controllers\PortadasController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Controllers\VideosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -289,6 +292,13 @@
       <DependentUpon>NewsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CategoriaPartial.cs" />
+    <Compile Include="Models\FilePhotoModels.cs" />
+    <Compile Include="Models\Fotos.cs">
+      <DependentUpon>NewsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\main.cs">
+      <DependentUpon>NewsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Noticia.cs">
       <DependentUpon>NewsModel.tt</DependentUpon>
     </Compile>
@@ -313,6 +323,9 @@
       <DependentUpon>NewsModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Usuario.cs">
+      <DependentUpon>NewsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Videos.cs">
       <DependentUpon>NewsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\WS\AccesoViewModel.cs" />

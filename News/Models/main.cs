@@ -14,9 +14,11 @@ namespace News.Models
     
     public partial class main
     {
-        public string whoweare { get; set; }
+        public long id_main { get; set; }
+        public string nombre { get; set; }
         public string urlwwa { get; set; }
-        public string autor { get; set; }
+        public string textwwa { get; set; }
+        public string textautor { get; set; }
         public string urlautor { get; set; }
     }
 }

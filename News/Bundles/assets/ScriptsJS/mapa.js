@@ -11,6 +11,6 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(mymap);
 
-L.marker([51.5, -0.09]).addTo(mymap)
-    .bindPopup('Adress')
+L.marker([37, -122]).addTo(mymap)
+    .bindPopup('Union Square Learning')
     .openPopup();

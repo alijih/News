@@ -14,39 +14,54 @@ namespace News.Controllers
 {
     public class mainsController : ApiController
     {
+        public string MessaError { get; private set; }
         private NewsEntities db = new NewsEntities();
 
         // GET: api/mains
-        public IQueryable<main> Getmain()
+        [HttpGet]
+        public IQueryable<main> Getmainppal()
         {
             return db.main;
         }
 
         // GET: api/mains/5
+        [HttpGet]
         [ResponseType(typeof(main))]
-        public IHttpActionResult Getmain(string id)
+        public IHttpActionResult Getmain(long id)
         {
+            string MensajeError = "Error";
             main main = db.main.Find(id);
             if (main == null)
             {
-                return NotFound();
+                MensajeError = "NOT FOUND THIS ID";
+                return BadRequest(MensajeError);
             }
 
             return Ok(main);
         }
 
+        [HttpPost]
         // PUT: api/mains/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult Putmain(string id, main main)
+        public IHttpActionResult Putmain(long id,main main)
         {
+            string MensajeError = "Error";
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                MensajeError = "NO CUMPLE LOS REQUISITOS";
+                return BadRequest(MensajeError);
             }
 
-            if (id != main.whoweare)
+            if (id != main.id_main)
             {
-                return BadRequest();
+                MensajeError = "DISTINTOS ID";
+                return BadRequest(MensajeError);
+            }
+
+            if (main.nombre != "portada")
+            {
+                MensajeError = "DISTINTOS ID";
+                return BadRequest(MensajeError);
             }
 
             db.Entry(main).State = EntityState.Modified;
@@ -59,7 +74,8 @@ namespace News.Controllers
             {
                 if (!mainExists(id))
                 {
-                    return NotFound();
+                    MensajeError = "NOT FOUND THIS ID";
+                    return BadRequest(MensajeError);
                 }
                 else
                 {
@@ -71,43 +87,84 @@ namespace News.Controllers
         }
 
         // POST: api/mains
+        [HttpPost]
         [ResponseType(typeof(main))]
         public IHttpActionResult Postmain(main main)
         {
+            string MensajeError = "Error";
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                MensajeError = "NO CUMPLE LOS REQUISITOS";
+                return BadRequest(MensajeError);
             }
 
-            db.main.Add(main);
+            main check = db.main.Where(a => a.nombre == "portada").FirstOrDefault();
 
-            try
+            if (check == null )
             {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                if (mainExists(main.whoweare))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+                main.nombre = "portada";
 
-            return CreatedAtRoute("DefaultApi", new { id = main.whoweare }, main);
+                db.main.Add(main);
+
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (DbUpdateException)
+                {
+                    if (mainExists(main.id_main))
+                    {
+                        return Conflict();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+
+
+                return CreatedAtRoute("DefaultApi", new { id = main.id_main }, main);
+            }
+            else {
+                main modificar = db.main.Where(a => a.nombre == "portada").FirstOrDefault();
+                modificar.textautor = main.textautor;
+                modificar.urlautor = main.urlautor;
+                modificar.textwwa = main.textwwa;
+                modificar.urlwwa = main.urlwwa;
+
+                db.Entry(modificar).State = EntityState.Modified;
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!mainExists(modificar.id_main))
+                    {
+                        MensajeError = "NOT FOUND THIS ID";
+                        return BadRequest(MensajeError);
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+
+                return StatusCode(HttpStatusCode.NoContent);
+
+            }
         }
 
         // DELETE: api/mains/5
         [ResponseType(typeof(main))]
-        public IHttpActionResult Deletemain(string id)
+        public IHttpActionResult Deletemain(long id)
         {
+            string MensajeError = "Error";
             main main = db.main.Find(id);
             if (main == null)
             {
-                return NotFound();
+                MensajeError = "NOT FOUND THIS ID";
+                return BadRequest(MensajeError);
             }
 
             db.main.Remove(main);
@@ -125,9 +182,9 @@ namespace News.Controllers
             base.Dispose(disposing);
         }
 
-        private bool mainExists(string id)
+        private bool mainExists(long id)
         {
-            return db.main.Count(e => e.whoweare == id) > 0;
+            return db.main.Count(e => e.id_main == id) > 0;
         }
     }
 }

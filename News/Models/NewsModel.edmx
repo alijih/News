@@ -19,21 +19,20 @@
             <PropertyRef Name="id_foto" />
           </Key>
           <Property Name="id_foto" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="url" Type="nchar" MaxLength="250" Nullable="false" />
+          <Property Name="url" Type="varchar" MaxLength="800" Nullable="false" />
+          <Property Name="hide" Type="tinyint" Nullable="false" />
+          <Property Name="titulo" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'News.dbo.main' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="main">
           <Key>
-            <PropertyRef Name="whoweare" />
-            <PropertyRef Name="urlwwa" />
-            <PropertyRef Name="autor" />
-            <PropertyRef Name="urlautor" />
+            <PropertyRef Name="id_main" />
           </Key>
-          <Property Name="whoweare" Type="text" Nullable="false" />
-          <Property Name="urlwwa" Type="nchar" MaxLength="250" Nullable="false" />
-          <Property Name="autor" Type="text" Nullable="false" />
-          <Property Name="urlautor" Type="nchar" MaxLength="250" Nullable="false" />
+          <Property Name="id_main" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="urlwwa" Type="varchar" MaxLength="800" Nullable="false" />
+          <Property Name="textwwa" Type="text" Nullable="false" />
+          <Property Name="textautor" Type="text" Nullable="false" />
+          <Property Name="urlautor" Type="varchar" MaxLength="800" Nullable="false" />
         </EntityType>
         <EntityType Name="Noticia">
           <Key>
@@ -41,11 +40,11 @@ advertencia 6002: La tabla o vista 'News.dbo.main' no tiene definida ninguna cla
           </Key>
           <Property Name="id_noticia" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_categoria" Type="bigint" Nullable="false" />
-          <Property Name="titulo" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="subtitulo" Type="varchar" MaxLength="50" />
+          <Property Name="titulo" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="subtitulo" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="descripcion" Type="text" Nullable="false" />
-          <Property Name="foto_portada" Type="varchar" MaxLength="500" Nullable="false" />
-          <Property Name="foto_noticia" Type="varchar" MaxLength="500" />
+          <Property Name="foto_portada" Type="varchar" MaxLength="600" Nullable="false" />
+          <Property Name="foto_noticia" Type="varchar" MaxLength="600" />
           <Property Name="portada" Type="tinyint" Nullable="false" />
           <Property Name="hide" Type="tinyint" Nullable="false" />
           <Property Name="date" Type="date" Nullable="false" />
@@ -83,23 +82,18 @@ advertencia 6002: La tabla o vista 'News.dbo.main' no tiene definida ninguna cla
             <PropertyRef Name="id_video" />
           </Key>
           <Property Name="id_video" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="url" Type="nchar" MaxLength="250" Nullable="false" />
+          <Property Name="url" Type="varchar" MaxLength="800" Nullable="false" />
+          <Property Name="hide" Type="tinyint" Nullable="false" />
+          <Property Name="titulo" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityContainer Name="NewsModelStoreContainer">
           <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Fotos" EntityType="Self.Fotos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="main" EntityType="Self.main" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Noticia" EntityType="Self.Noticia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Portada" EntityType="Self.Portada" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Videos" EntityType="Self.Videos" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="main" EntityType="Self.main" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [main].[whoweare] AS [whoweare], 
-    [main].[urlwwa] AS [urlwwa], 
-    [main].[autor] AS [autor], 
-    [main].[urlautor] AS [urlautor]
-    FROM [dbo].[main] AS [main]</DefiningQuery>
-          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -145,11 +139,11 @@ advertencia 6002: La tabla o vista 'News.dbo.main' no tiene definida ninguna cla
           </Key>
           <Property Name="id_noticia" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_categoria" Type="Int64" Nullable="false" />
-          <Property Name="titulo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="subtitulo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="titulo" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="subtitulo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="foto_portada" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="foto_noticia" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="foto_portada" Type="String" Nullable="false" MaxLength="600" FixedLength="false" Unicode="false" />
+          <Property Name="foto_noticia" Type="String" MaxLength="600" FixedLength="false" Unicode="false" />
           <Property Name="portada" Type="Byte" Nullable="false" />
           <Property Name="hide" Type="Byte" Nullable="false" />
           <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
@@ -171,26 +165,29 @@ advertencia 6002: La tabla o vista 'News.dbo.main' no tiene definida ninguna cla
             <PropertyRef Name="id_foto" />
           </Key>
           <Property Name="id_foto" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="url" Type="String" Nullable="false" MaxLength="250" FixedLength="true" Unicode="true" />
+          <Property Name="url" Type="String" Nullable="false" MaxLength="800" FixedLength="false" Unicode="false" />
+          <Property Name="hide" Type="Byte" Nullable="false" />
+          <Property Name="titulo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Videos">
           <Key>
             <PropertyRef Name="id_video" />
           </Key>
           <Property Name="id_video" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="url" Type="String" Nullable="false" MaxLength="250" FixedLength="true" Unicode="true" />
+          <Property Name="url" Type="String" Nullable="false" MaxLength="800" FixedLength="false" Unicode="false" />
+          <Property Name="hide" Type="Byte" Nullable="false" />
+          <Property Name="titulo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="main">
           <Key>
-            <PropertyRef Name="whoweare" />
-            <PropertyRef Name="urlwwa" />
-            <PropertyRef Name="autor" />
-            <PropertyRef Name="urlautor" />
+            <PropertyRef Name="id_main" />
           </Key>
-          <Property Name="whoweare" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="urlwwa" Type="String" Nullable="false" MaxLength="250" FixedLength="true" Unicode="true" />
-          <Property Name="autor" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="urlautor" Type="String" Nullable="false" MaxLength="250" FixedLength="true" Unicode="true" />
+          <Property Name="id_main" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="urlwwa" Type="String" Nullable="false" MaxLength="800" FixedLength="false" Unicode="false" />
+          <Property Name="textwwa" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="textautor" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="urlautor" Type="String" Nullable="false" MaxLength="800" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -257,6 +254,8 @@ advertencia 6002: La tabla o vista 'News.dbo.main' no tiene definida ninguna cla
           <EntitySetMapping Name="Fotos">
             <EntityTypeMapping TypeName="NewsModel.Fotos">
               <MappingFragment StoreEntitySet="Fotos">
+                <ScalarProperty Name="titulo" ColumnName="titulo" />
+                <ScalarProperty Name="hide" ColumnName="hide" />
                 <ScalarProperty Name="url" ColumnName="url" />
                 <ScalarProperty Name="id_foto" ColumnName="id_foto" />
               </MappingFragment>
@@ -265,6 +264,8 @@ advertencia 6002: La tabla o vista 'News.dbo.main' no tiene definida ninguna cla
           <EntitySetMapping Name="Videos">
             <EntityTypeMapping TypeName="NewsModel.Videos">
               <MappingFragment StoreEntitySet="Videos">
+                <ScalarProperty Name="titulo" ColumnName="titulo" />
+                <ScalarProperty Name="hide" ColumnName="hide" />
                 <ScalarProperty Name="url" ColumnName="url" />
                 <ScalarProperty Name="id_video" ColumnName="id_video" />
               </MappingFragment>
@@ -274,9 +275,11 @@ advertencia 6002: La tabla o vista 'News.dbo.main' no tiene definida ninguna cla
             <EntityTypeMapping TypeName="NewsModel.main">
               <MappingFragment StoreEntitySet="main">
                 <ScalarProperty Name="urlautor" ColumnName="urlautor" />
-                <ScalarProperty Name="autor" ColumnName="autor" />
+                <ScalarProperty Name="textautor" ColumnName="textautor" />
+                <ScalarProperty Name="textwwa" ColumnName="textwwa" />
                 <ScalarProperty Name="urlwwa" ColumnName="urlwwa" />
-                <ScalarProperty Name="whoweare" ColumnName="whoweare" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id_main" ColumnName="id_main" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -1,7 +1,6 @@
-const links = document.querySelector('.links');
-const hamburguer = document.getElementById('hamburguer');
-const link = document.querySelectorAll('.links a');
-const conten = document.getElementById('conten');
+let hamburguer = document.getElementById('hamburguer');
+let link = document.querySelectorAll('.links a');
+let conten = document.getElementById('conten');
 
 
 

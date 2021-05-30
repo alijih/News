@@ -16,5 +16,7 @@ namespace News.Models
     {
         public long id_video { get; set; }
         public string url { get; set; }
+        public byte hide { get; set; }
+        public string titulo { get; set; }
     }
 }

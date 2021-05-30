@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
 using News.Models;
@@ -15,7 +17,7 @@ namespace News.Controllers
     public class FotosController : ApiController
     {
         private NewsEntities db = new NewsEntities();
-
+        public string MessaError { get; private set; }
         // GET: api/Fotos
         [HttpGet]
         public IQueryable<Fotos> GetFotos()
@@ -25,7 +27,7 @@ namespace News.Controllers
         [HttpGet]
         // GET: api/Fotos/5
         [ResponseType(typeof(Fotos))]
-        public IHttpActionResult GetFotos(long id)
+        public IHttpActionResult GetFoto(long id)
         {
             string MensajeError = "Error";
             Fotos fotos = db.Fotos.Find(id);
@@ -84,15 +86,43 @@ namespace News.Controllers
         public IHttpActionResult PostFotos(Fotos fotos)
         {
             byte[] imageBytesPortada = null;
+            bool creardirfoto = false;
+            if (fotos.url != "")
+            {
+                creardirfoto = true;
+                imageBytesPortada = Convert.FromBase64String(fotos.url);
+            }
+
+            
             string MensajeError = "Error";
             if (!ModelState.IsValid)
             {
                 MensajeError = "an error has occurred. try again later ";
                 return BadRequest(MensajeError);
             }
-
+            fotos.url = "";
             db.Fotos.Add(fotos);
             db.SaveChanges();
+            Fotos ofoto = db.Fotos.Where(a => a.titulo == fotos.titulo).FirstOrDefault();
+            if (creardirfoto)
+            {
+                String path = HttpContext.Current.Server.MapPath("~/images/Photos/"); //Path
+                                                                                                             //Check if directory exist
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path); //Create directory if it doesn't exist
+                }
+
+                string imageName = path + ofoto.id_foto;
+                //set the image path
+                string imgPath = Path.Combine(path, imageName);
+                File.WriteAllBytes(imgPath, imageBytesPortada);
+                ofoto.url = imgPath;
+                db.Entry(ofoto).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+
+
 
             return CreatedAtRoute("DefaultApi", new { id = fotos.id_foto }, fotos);
         }
@@ -102,7 +132,7 @@ namespace News.Controllers
 
         // DELETE: api/Fotos/5
         [ResponseType(typeof(Fotos))]
-        public IHttpActionResult DeleteFotos(long id)
+        public IHttpActionResult DeleteFoto(long id)
         {
             string MensajeError = "Error";
             Fotos fotos = db.Fotos.Find(id);

@@ -15,41 +15,58 @@ namespace News.Controllers
     public class VideosController : ApiController
     {
         private NewsEntities db = new NewsEntities();
-
+        public string MessaError { get; private set; }
         // GET: api/Videos
-        public IQueryable<Videos> GetVideos()
+        [HttpGet]
+        public IQueryable<Videos> GetVideos()       //SI ESTA LOGUEADO DEVUELVE TODOS LOS VIDEOS
         {
             return db.Videos;
         }
+        [HttpGet]
+        public List<Videos> GetVideosNR()       //SI NO ESTA LOGUEADO DEVUELVE LOS QUE SE PUEDEN VER
+        {
+            return db.Videos.Where(v => v.hide != 0).ToList(); ;
+        }
 
         // GET: api/Videos/5
-        [ResponseType(typeof(Videos))]
-        public IHttpActionResult GetVideos(long id)
+        [HttpGet]
+        [ResponseType(typeof(Videos))]           // devuelve video por id
+        public IHttpActionResult GetVideos(long id)   
         {
+            string MensajeError = "Error";
             Videos videos = db.Videos.Find(id);
             if (videos == null)
             {
-                return NotFound();
+                MensajeError = "AUN NO SE ENCONTRO EL VIDEO";
+                return BadRequest(MensajeError);
             }
 
             return Ok(videos);
         }
 
         // PUT: api/Videos/5
+        [HttpPost]
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutVideos(long id, Videos videos)
+        public IHttpActionResult PutVideos(long id, Videos ovideo)
         {
+            string MensajeError = "Error";
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                MensajeError = "ERROR INESPERADO";
+                return BadRequest(MensajeError);
+
             }
 
-            if (id != videos.id_video)
+            if (id != ovideo.id_video)
             {
-                return BadRequest();
+                MensajeError = "ID VIDEO NO CORRESPONDE";
+                return BadRequest(MensajeError);
             }
 
-            db.Entry(videos).State = EntityState.Modified;
+            Videos video = db.Videos.Where(a => a.id_video == id).FirstOrDefault();
+            video.url = ovideo.url;
+            video.hide = ovideo.hide;
+            db.Entry(video).State = EntityState.Modified;
 
             try
             {
@@ -59,7 +76,8 @@ namespace News.Controllers
             {
                 if (!VideosExists(id))
                 {
-                    return NotFound();
+                    MensajeError = "VIDEO NO ENCONTRADO";
+                    return BadRequest(MensajeError);
                 }
                 else
                 {
@@ -70,13 +88,18 @@ namespace News.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+
+
+        [HttpPost]
         // POST: api/Videos
         [ResponseType(typeof(Videos))]
         public IHttpActionResult PostVideos(Videos videos)
         {
+            string MensajeError = "Error";
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                MensajeError = "ERROR INESPERADO";
+                return BadRequest(MensajeError);
             }
 
             db.Videos.Add(videos);
@@ -85,14 +108,17 @@ namespace News.Controllers
             return CreatedAtRoute("DefaultApi", new { id = videos.id_video }, videos);
         }
 
+        [HttpDelete]
         // DELETE: api/Videos/5
         [ResponseType(typeof(Videos))]
         public IHttpActionResult DeleteVideos(long id)
         {
+            string MensajeError = "Error";
             Videos videos = db.Videos.Find(id);
             if (videos == null)
             {
-                return NotFound();
+                MensajeError = "VIDEO NO ENCONTRADO";
+                return BadRequest(MensajeError);
             }
 
             db.Videos.Remove(videos);

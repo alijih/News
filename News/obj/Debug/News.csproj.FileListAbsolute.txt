@@ -192,3 +192,9 @@ D:\JOBS DEVELOPMENT\git\News\News\obj\Debug\News.csproj.CoreCompileInputs.cache
 D:\JOBS DEVELOPMENT\git\News\News\obj\Debug\News.csproj.CopyComplete
 D:\JOBS DEVELOPMENT\git\News\News\obj\Debug\News.dll
 D:\JOBS DEVELOPMENT\git\News\News\obj\Debug\News.pdb
+D:\JOBS DEVELOPMENT\git\News\News\bin\Microsoft.AspNetCore.Metadata.dll
+D:\JOBS DEVELOPMENT\git\News\News\bin\System.IO.Pipelines.dll
+D:\JOBS DEVELOPMENT\git\News\News\bin\Microsoft.AspNetCore.Metadata.xml
+D:\JOBS DEVELOPMENT\git\News\News\bin\Microsoft.DotNet.PlatformAbstractions.xml
+D:\JOBS DEVELOPMENT\git\News\News\bin\Microsoft.Extensions.DependencyModel.xml
+D:\JOBS DEVELOPMENT\git\News\News\bin\System.IO.Pipelines.xml

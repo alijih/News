@@ -1,23 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="NewsModelStoreContainer" CdmEntityContainer="NewsEntities">
-    <EntitySetMapping Name="Usuario">
-      <EntityTypeMapping TypeName="NewsModel.Usuario">
-        <MappingFragment StoreEntitySet="Usuario">
-          <ScalarProperty Name="token" ColumnName="token" />
-          <ScalarProperty Name="active" ColumnName="active" />
-          <ScalarProperty Name="apellido" ColumnName="apellido" />
-          <ScalarProperty Name="nombre" ColumnName="nombre" />
-          <ScalarProperty Name="user_descripcion" ColumnName="user_descripcion" />
-          <ScalarProperty Name="user_foto" ColumnName="user_foto" />
-          <ScalarProperty Name="rol" ColumnName="rol" />
-          <ScalarProperty Name="password" ColumnName="password" />
-          <ScalarProperty Name="email" ColumnName="email" />
-          <ScalarProperty Name="nickname" ColumnName="nickname" />
-          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Categoria">
       <EntityTypeMapping TypeName="NewsModel.Categoria">
         <MappingFragment StoreEntitySet="Categoria">
@@ -25,6 +8,28 @@
           <ScalarProperty Name="portada" ColumnName="portada" />
           <ScalarProperty Name="nombre" ColumnName="nombre" />
           <ScalarProperty Name="id_categoria" ColumnName="id_categoria" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Fotos">
+      <EntityTypeMapping TypeName="NewsModel.Fotos">
+        <MappingFragment StoreEntitySet="Fotos">
+          <ScalarProperty Name="titulo" ColumnName="titulo" />
+          <ScalarProperty Name="hide" ColumnName="hide" />
+          <ScalarProperty Name="url" ColumnName="url" />
+          <ScalarProperty Name="id_foto" ColumnName="id_foto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="main">
+      <EntityTypeMapping TypeName="NewsModel.main">
+        <MappingFragment StoreEntitySet="main">
+          <ScalarProperty Name="urlautor" ColumnName="urlautor" />
+          <ScalarProperty Name="textautor" ColumnName="textautor" />
+          <ScalarProperty Name="textwwa" ColumnName="textwwa" />
+          <ScalarProperty Name="urlwwa" ColumnName="urlwwa" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="id_main" ColumnName="id_main" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -57,13 +62,20 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Fotos">
-      <EntityTypeMapping TypeName="NewsModel.Fotos">
-        <MappingFragment StoreEntitySet="Fotos">
-          <ScalarProperty Name="titulo" ColumnName="titulo" />
-          <ScalarProperty Name="hide" ColumnName="hide" />
-          <ScalarProperty Name="url" ColumnName="url" />
-          <ScalarProperty Name="id_foto" ColumnName="id_foto" />
+    <EntitySetMapping Name="Usuario">
+      <EntityTypeMapping TypeName="NewsModel.Usuario">
+        <MappingFragment StoreEntitySet="Usuario">
+          <ScalarProperty Name="token" ColumnName="token" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="apellido" ColumnName="apellido" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="user_descripcion" ColumnName="user_descripcion" />
+          <ScalarProperty Name="user_foto" ColumnName="user_foto" />
+          <ScalarProperty Name="rol" ColumnName="rol" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="nickname" ColumnName="nickname" />
+          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -74,18 +86,6 @@
           <ScalarProperty Name="hide" ColumnName="hide" />
           <ScalarProperty Name="url" ColumnName="url" />
           <ScalarProperty Name="id_video" ColumnName="id_video" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="main">
-      <EntityTypeMapping TypeName="NewsModel.main">
-        <MappingFragment StoreEntitySet="main">
-          <ScalarProperty Name="urlautor" ColumnName="urlautor" />
-          <ScalarProperty Name="textautor" ColumnName="textautor" />
-          <ScalarProperty Name="textwwa" ColumnName="textwwa" />
-          <ScalarProperty Name="urlwwa" ColumnName="urlwwa" />
-          <ScalarProperty Name="nombre" ColumnName="nombre" />
-          <ScalarProperty Name="id_main" ColumnName="id_main" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

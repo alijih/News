@@ -5,14 +5,14 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="12dadeb215a3459898d0feb10bc09fe8" Name="Diagram1">
-        <EntityTypeShape EntityType="NewsModel.Usuario" Width="1.5" PointX="0.75" PointY="5.75" />
         <EntityTypeShape EntityType="NewsModel.Categoria" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="NewsModel.Noticia" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="NewsModel.Fotos" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="NewsModel.main" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="NewsModel.Noticia" Width="1.5" PointX="2.75" PointY="3.75" />
         <EntityTypeShape EntityType="NewsModel.Portada" Width="1.5" PointX="4.75" PointY="0.75" />
-        <EntityTypeShape EntityType="NewsModel.Fotos" Width="1.5" PointX="3.375" PointY="4.75" />
-        <EntityTypeShape EntityType="NewsModel.Videos" Width="1.5" PointX="5.375" PointY="3.75" />
-        <EntityTypeShape EntityType="NewsModel.main" Width="1.5" PointX="5.375" PointY="6.75" />
-        </Diagram>
+        <EntityTypeShape EntityType="NewsModel.Usuario" Width="1.5" PointX="4.75" PointY="3.75" />
+        <EntityTypeShape EntityType="NewsModel.Videos" Width="1.5" PointX="6.75" PointY="0.75" />
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

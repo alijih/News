@@ -50,7 +50,7 @@
       <PropertyRef Name="id_portada" />
     </Key>
     <Property Name="id_portada" Type="int" Nullable="false" />
-    <Property Name="cantidad" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="cantidad" Type="int" Nullable="false" />
     <Property Name="latest" Type="bigint" Nullable="false" />
     <Property Name="latestr" Type="bigint" Nullable="false" />
     <Property Name="nombre" Type="nchar" MaxLength="10" Nullable="false" />

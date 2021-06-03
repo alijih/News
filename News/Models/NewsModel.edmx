@@ -55,7 +55,7 @@
             <PropertyRef Name="id_portada" />
           </Key>
           <Property Name="id_portada" Type="int" Nullable="false" />
-          <Property Name="cantidad" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="cantidad" Type="int" Nullable="false" />
           <Property Name="latest" Type="bigint" Nullable="false" />
           <Property Name="latestr" Type="bigint" Nullable="false" />
           <Property Name="nombre" Type="nchar" MaxLength="10" Nullable="false" />
@@ -100,14 +100,70 @@
     <edmx:ConceptualModels>
       <Schema Namespace="NewsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="NewsEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Usuario" EntityType="NewsModel.Usuario" />
           <EntitySet Name="Categoria" EntityType="NewsModel.Categoria" />
+          <EntitySet Name="Fotos" EntityType="NewsModel.Fotos" />
+          <EntitySet Name="main" EntityType="NewsModel.main" />
           <EntitySet Name="Noticia" EntityType="NewsModel.Noticia" />
           <EntitySet Name="Portada" EntityType="NewsModel.Portada" />
-          <EntitySet Name="Fotos" EntityType="NewsModel.Fotos" />
+          <EntitySet Name="Usuario" EntityType="NewsModel.Usuario" />
           <EntitySet Name="Videos" EntityType="NewsModel.Videos" />
-          <EntitySet Name="main" EntityType="NewsModel.main" />
-          </EntityContainer>
+        </EntityContainer>
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="id_categoria" />
+          </Key>
+          <Property Name="id_categoria" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="portada" Type="Byte" Nullable="false" />
+          <Property Name="hide" Type="Byte" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Fotos">
+          <Key>
+            <PropertyRef Name="id_foto" />
+          </Key>
+          <Property Name="id_foto" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="url" Type="String" Nullable="false" MaxLength="800" FixedLength="false" Unicode="false" />
+          <Property Name="hide" Type="Byte" Nullable="false" />
+          <Property Name="titulo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="main">
+          <Key>
+            <PropertyRef Name="id_main" />
+          </Key>
+          <Property Name="id_main" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="urlwwa" Type="String" Nullable="false" MaxLength="800" FixedLength="false" Unicode="false" />
+          <Property Name="textwwa" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="textautor" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="urlautor" Type="String" Nullable="false" MaxLength="800" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Noticia">
+          <Key>
+            <PropertyRef Name="id_noticia" />
+          </Key>
+          <Property Name="id_noticia" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_categoria" Type="Int64" Nullable="false" />
+          <Property Name="titulo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="subtitulo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="foto_portada" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="foto_noticia" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="portada" Type="Byte" Nullable="false" />
+          <Property Name="hide" Type="Byte" Nullable="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="video_noticia" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Portada">
+          <Key>
+            <PropertyRef Name="id_portada" />
+          </Key>
+          <Property Name="id_portada" Type="Int32" Nullable="false" />
+          <Property Name="cantidad" Type="Int32" Nullable="false" />
+          <Property Name="latest" Type="Int64" Nullable="false" />
+          <Property Name="latestr" Type="Int64" Nullable="false" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="igual" Type="Int32" Nullable="false" />
+        </EntityType>
         <EntityType Name="Usuario">
           <Key>
             <PropertyRef Name="id_usuario" />
@@ -124,51 +180,6 @@
           <Property Name="active" Type="Boolean" />
           <Property Name="token" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="Categoria">
-          <Key>
-            <PropertyRef Name="id_categoria" />
-          </Key>
-          <Property Name="id_categoria" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="portada" Type="Byte" Nullable="false" />
-          <Property Name="hide" Type="Byte" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Noticia">
-          <Key>
-            <PropertyRef Name="id_noticia" />
-          </Key>
-          <Property Name="id_noticia" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_categoria" Type="Int64" Nullable="false" />
-          <Property Name="titulo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="subtitulo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="foto_portada" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="foto_noticia" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="portada" Type="Byte" Nullable="false" />
-          <Property Name="hide" Type="Byte" Nullable="false" />
-          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="video_noticia" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="Portada">
-          <Key>
-            <PropertyRef Name="id_portada" />
-          </Key>
-          <Property Name="id_portada" Type="Int32" Nullable="false" />
-          <Property Name="cantidad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="latest" Type="Int64" Nullable="false" />
-          <Property Name="latestr" Type="Int64" Nullable="false" />
-          <Property Name="nombre" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="igual" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Fotos">
-          <Key>
-            <PropertyRef Name="id_foto" />
-          </Key>
-          <Property Name="id_foto" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="url" Type="String" Nullable="false" MaxLength="800" FixedLength="false" Unicode="false" />
-          <Property Name="hide" Type="Byte" Nullable="false" />
-          <Property Name="titulo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="Videos">
           <Key>
             <PropertyRef Name="id_video" />
@@ -178,40 +189,12 @@
           <Property Name="hide" Type="Byte" Nullable="false" />
           <Property Name="titulo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="main">
-          <Key>
-            <PropertyRef Name="id_main" />
-          </Key>
-          <Property Name="id_main" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="urlwwa" Type="String" Nullable="false" MaxLength="800" FixedLength="false" Unicode="false" />
-          <Property Name="textwwa" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="textautor" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="urlautor" Type="String" Nullable="false" MaxLength="800" FixedLength="false" Unicode="false" />
-        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="NewsModelStoreContainer" CdmEntityContainer="NewsEntities">
-          <EntitySetMapping Name="Usuario">
-            <EntityTypeMapping TypeName="NewsModel.Usuario">
-              <MappingFragment StoreEntitySet="Usuario">
-                <ScalarProperty Name="token" ColumnName="token" />
-                <ScalarProperty Name="active" ColumnName="active" />
-                <ScalarProperty Name="apellido" ColumnName="apellido" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="user_descripcion" ColumnName="user_descripcion" />
-                <ScalarProperty Name="user_foto" ColumnName="user_foto" />
-                <ScalarProperty Name="rol" ColumnName="rol" />
-                <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="nickname" ColumnName="nickname" />
-                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Categoria">
             <EntityTypeMapping TypeName="NewsModel.Categoria">
               <MappingFragment StoreEntitySet="Categoria">
@@ -219,6 +202,28 @@
                 <ScalarProperty Name="portada" ColumnName="portada" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="id_categoria" ColumnName="id_categoria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fotos">
+            <EntityTypeMapping TypeName="NewsModel.Fotos">
+              <MappingFragment StoreEntitySet="Fotos">
+                <ScalarProperty Name="titulo" ColumnName="titulo" />
+                <ScalarProperty Name="hide" ColumnName="hide" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="id_foto" ColumnName="id_foto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="main">
+            <EntityTypeMapping TypeName="NewsModel.main">
+              <MappingFragment StoreEntitySet="main">
+                <ScalarProperty Name="urlautor" ColumnName="urlautor" />
+                <ScalarProperty Name="textautor" ColumnName="textautor" />
+                <ScalarProperty Name="textwwa" ColumnName="textwwa" />
+                <ScalarProperty Name="urlwwa" ColumnName="urlwwa" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id_main" ColumnName="id_main" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -251,13 +256,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Fotos">
-            <EntityTypeMapping TypeName="NewsModel.Fotos">
-              <MappingFragment StoreEntitySet="Fotos">
-                <ScalarProperty Name="titulo" ColumnName="titulo" />
-                <ScalarProperty Name="hide" ColumnName="hide" />
-                <ScalarProperty Name="url" ColumnName="url" />
-                <ScalarProperty Name="id_foto" ColumnName="id_foto" />
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="NewsModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="token" ColumnName="token" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="apellido" ColumnName="apellido" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="user_descripcion" ColumnName="user_descripcion" />
+                <ScalarProperty Name="user_foto" ColumnName="user_foto" />
+                <ScalarProperty Name="rol" ColumnName="rol" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="nickname" ColumnName="nickname" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -271,19 +283,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="main">
-            <EntityTypeMapping TypeName="NewsModel.main">
-              <MappingFragment StoreEntitySet="main">
-                <ScalarProperty Name="urlautor" ColumnName="urlautor" />
-                <ScalarProperty Name="textautor" ColumnName="textautor" />
-                <ScalarProperty Name="textwwa" ColumnName="textwwa" />
-                <ScalarProperty Name="urlwwa" ColumnName="urlwwa" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="id_main" ColumnName="id_main" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          </EntityContainerMapping>
+        </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

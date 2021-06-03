@@ -35,11 +35,11 @@
     </Key>
     <Property Name="id_noticia" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="id_categoria" Type="bigint" Nullable="false" />
-    <Property Name="titulo" Type="varchar" MaxLength="80" Nullable="false" />
-    <Property Name="subtitulo" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="titulo" Type="text" Nullable="false" />
+    <Property Name="subtitulo" Type="text" Nullable="false" />
     <Property Name="descripcion" Type="text" Nullable="false" />
-    <Property Name="foto_portada" Type="varchar" MaxLength="600" Nullable="false" />
-    <Property Name="foto_noticia" Type="varchar" MaxLength="600" />
+    <Property Name="foto_portada" Type="text" Nullable="false" />
+    <Property Name="foto_noticia" Type="text" />
     <Property Name="portada" Type="tinyint" Nullable="false" />
     <Property Name="hide" Type="tinyint" Nullable="false" />
     <Property Name="date" Type="date" Nullable="false" />
@@ -77,7 +77,7 @@
       <PropertyRef Name="id_video" />
     </Key>
     <Property Name="id_video" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="url" Type="varchar" MaxLength="800" Nullable="false" />
+    <Property Name="url" Type="text" Nullable="false" />
     <Property Name="hide" Type="tinyint" Nullable="false" />
     <Property Name="titulo" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>

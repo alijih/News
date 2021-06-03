@@ -330,6 +330,7 @@
     </Compile>
     <Compile Include="Models\WS\AccesoViewModel.cs" />
     <Compile Include="Models\WS\Respuesta.cs" />
+    <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -477,11 +478,45 @@
     <Content Include="bin\System.Web.WebPages.Razor.xml" />
     <Content Include="bin\System.Web.WebPages.xml" />
     <Content Include="bin\WebGrease.dll" />
+    <Content Include="Bundles\assets\DATAVISUAL.png" />
+    <Content Include="Bundles\assets\David.jpg" />
+    <Content Include="Bundles\assets\Edificio.png" />
+    <Content Include="Bundles\assets\HOME 1.jpg" />
+    <Content Include="Bundles\assets\HOME 2.jpg" />
+    <Content Include="Bundles\assets\HOME 3.jpg" />
+    <Content Include="Bundles\assets\ICON LITERACY.png" />
+    <Content Include="Bundles\assets\ICON POLICY.png" />
+    <Content Include="Bundles\assets\ICON RESOURCE.png" />
+    <Content Include="Bundles\assets\img\profile.png" />
+    <Content Include="Bundles\assets\link.png" />
+    <Content Include="Bundles\assets\LINKEDIN.png" />
+    <Content Include="Bundles\assets\logo b.png" />
+    <Content Include="Bundles\assets\logo.png" />
+    <Content Include="Bundles\assets\mapa.jpg" />
+    <Content Include="Bundles\assets\probando.jpg" />
+    <Content Include="Bundles\assets\prueb.jpeg" />
+    <Content Include="Bundles\assets\ScriptsJS\carru.js" />
+    <Content Include="Bundles\assets\ScriptsJS\hamburguesa.js" />
+    <Content Include="Bundles\assets\ScriptsJS\leaflet\images\layers-2x.png" />
+    <Content Include="Bundles\assets\ScriptsJS\leaflet\images\layers.png" />
+    <Content Include="Bundles\assets\ScriptsJS\leaflet\images\marker-icon-2x.png" />
+    <Content Include="Bundles\assets\ScriptsJS\leaflet\images\marker-icon.png" />
+    <Content Include="Bundles\assets\ScriptsJS\leaflet\images\marker-shadow.png" />
+    <Content Include="Bundles\assets\ScriptsJS\leaflet\leaflet-src.esm.js" />
+    <Content Include="Bundles\assets\ScriptsJS\leaflet\leaflet-src.js" />
+    <Content Include="Bundles\assets\ScriptsJS\leaflet\leaflet.css" />
+    <Content Include="Bundles\assets\ScriptsJS\leaflet\leaflet.js" />
+    <Content Include="Bundles\assets\ScriptsJS\mapa.js" />
+    <Content Include="Bundles\assets\ScriptsJS\slider.js" />
+    <Content Include="Bundles\assets\twit.png" />
+    <Content Include="Bundles\assets\TWITTER.png" />
     <Content Include="Bundles\favicon.ico" />
     <Content Include="Bundles\index.html" />
+    <Content Include="Bundles\LOGO.png" />
     <Content Include="Bundles\main.js" />
     <Content Include="Bundles\polyfills.js" />
     <Content Include="Bundles\runtime.js" />
+    <Content Include="Bundles\scripts.js" />
     <Content Include="Bundles\styles.css" />
     <Content Include="Bundles\vendor.js" />
     <Content Include="Content\bootstrap-grid.css" />
@@ -493,6 +528,14 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\News\66\noticia.png" />
+    <Content Include="images\News\66\portada.png" />
+    <Content Include="images\News\75\noticia.png" />
+    <Content Include="images\News\75\portada.png" />
+    <Content Include="images\News\76\noticia.png" />
+    <Content Include="images\News\77\noticia.png" />
+    <Content Include="images\News\77\portada.png" />
+    <Content Include="images\News\78\noticia.png" />
     <Content Include="Models\NewsModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>NewsModel.Context.cs</LastGenOutput>
@@ -549,6 +592,10 @@
     <Content Include="bin\roslyn\vbc.exe.config" />
     <Content Include="bin\roslyn\vbc.rsp" />
     <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
+    <Content Include="Bundles\assets\ScriptsJS\leaflet\leaflet-src.esm.js.map" />
+    <Content Include="Bundles\assets\ScriptsJS\leaflet\leaflet-src.js.map" />
+    <Content Include="Bundles\assets\ScriptsJS\leaflet\leaflet.js.map" />
+    <Content Include="Bundles\scripts.js.map" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
